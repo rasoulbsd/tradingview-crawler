@@ -1,0 +1,19 @@
+{
+  "name": "tradingview-crawler",
+  "version": "1.0.0",
+  "description": "crawler for tradingview.com",
+  "main": "gmail-creator.js",
+  "scripts": {
+    "main": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rasoulbsd/tradingview-crawler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rasoulbsd/tradingview-crawler/issues"
+  },
+  "homepage": "https://github.com/rasoulbsd/tradingview-crawler#readme"
+}
