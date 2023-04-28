@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/rasoulbsd/tradingview-crawler/issues"
   },
-  "homepage": "https://github.com/rasoulbsd/tradingview-crawler#readme"
+  "homepage": "https://github.com/rasoulbsd/tradingview-crawler#readme",
+  "dependencies": {
+    "winston": "^3.8.2"
+  }
 }
