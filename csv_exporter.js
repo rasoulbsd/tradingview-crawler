@@ -6,7 +6,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-var logger = initialize_logger("CSV_Exporter")
+var logger = initialize_logger()
 
 const email = "desab19561@loongwin.com";
 const username = "BrearLaudf92cafd6a3d249968bcd38b6e0";
