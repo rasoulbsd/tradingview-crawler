@@ -49,3 +49,4 @@ src/.DS_Store
 src/test.js
 package-lock.json
 
+.env
