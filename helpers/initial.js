@@ -1,3 +1,8 @@
+const puppeteer = require('puppeteer-extra');
+var userAgent = require('user-agents');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
+
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
 
@@ -5,7 +10,13 @@ var myFormat;
 
 
 module.exports = {
-    initialize_logger(save_log = false){
+    async initial_crawler_config(){
+        const browser = await puppeteer.launch({ headless: "new" });
+        const page = await browser.newPage();
+        await page.setUserAgent(userAgent.random().toString());
+        return page;
+    },
+    initial_logger(save_log = false){
         // Define log format
         myFormat = printf(({ level, message, label, timestamp }) => {
             switch (level) {

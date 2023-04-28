@@ -1,28 +1,39 @@
-const puppeteer = require('puppeteer-extra');
-var userAgent = require('user-agents');
-const { initialize_logger, change_logger_label } = require("./helpers/initial.js")
-
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
-
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-var logger = initialize_logger()
+
+const { initial_crawler_config, initial_logger, change_logger_label } = require("./helpers/initial.js")
+var logger = initial_logger()
 
 const email = "desab19561@loongwin.com";
-const username = "BrearLaudf92cafd6a3d249968bcd38b6e0";
 const password = "f92cafd6-a3d2-4996-8bcd-38b6e08dd0e2123!";
 const value = 1000;
 
 (async () => {
-    logger = change_logger_label(logger, "Login")
-      
-    logger.info("Starting CSV Exporter")
-    const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
-    await page.setUserAgent(userAgent.random().toString())
+    logger = change_logger_label(logger, "INITIAL")
+    var page;
+    try{
+        logger.info("Opening browser")
+        page = await initial_crawler_config()
+    }
+    catch(err){
+        logger.error(err.message)
+        process.exit(3)
+    }
 
-    logger.info("Logging to the account")
-    var [res, signed_in_page] = await tv_login(browser, email, username, password)
+    logger = change_logger_label(logger, "URL")
+    const url = "https://www.tradingview.com/"
+    logger.info(`Opening tv url: ${url}`)
+    try{
+        await page.goto(url, 
+            { waitUntil: 'domcontentloaded' }
+        )
+    }
+    catch(err){
+        logger.error(err.message)
+        process.exit()
+    }
+
+    logger = change_logger_label(logger, "Login")
+    var [res, signed_in_page] = await tv_login(browser, email, password)
     if (res == 'Done'){
         logger.info("Login Successful!")
     }
@@ -32,7 +43,6 @@ const value = 1000;
     }
 
     logger = change_logger_label(logger, "TV-Operations")
-    logger.info("Starting TV Operations")
     res = await tv_functions(signed_in_page, value);
     if(res == 'Done'){
         logger.info(`The account for value: ${value} has been created successfully!`)
@@ -40,45 +50,44 @@ const value = 1000;
 
 })();
 
-async function tv_login(browser, email, username, password){
-    const page = await browser.newPage();
-    await page.setUserAgent(userAgent.random().toString())
-
-    const url = "https://www.tradingview.com/"
-    await page.goto(url, 
-        { waitUntil: 'domcontentloaded' }
-        )
-
+async function tv_login(page, email, password){
+    logger.info("Open user menu")
     await page.waitForSelector('button[aria-label="Open user menu"]');
     // user_menu_btn = await page.$('button[aria-label="Open user menu"]');
     await page.click('button[aria-label="Open user menu"]')
-    
+
+    logger.info("Click on sign in button")
     await page.waitForSelector("button[data-name=header-user-menu-sign-in]")
     sign_in_btn = await page.$("button[data-name=header-user-menu-sign-in]")
     await sign_in_btn.evaluate((el) => el.click());
 
+    logger.info("Click on email button")
     await page.waitForSelector('.js-show-email')
     email_btn = await page.$(".js-show-email");
     await email_btn.click()
 
+    logger.info("Typing email and password")
     await page.waitForSelector('input[name=username]')
     await page.focus('input[name=username]')
     await page.keyboard.type(email)
     await page.focus('input[name=password]')
     await page.keyboard.type(password)
 
+    logger.info("Click on remember me checkbox")
     await page.click("input[name=remember]")
 
+    logger.info("Submiting login form")
     await page.click(".tv-button__loader")
 
     return ['Done', page]
 }
 
 async function tv_functions(page, value){
-    // await sleep(10000)
+    logger.info("Starting TV Operations")
     await page.waitForSelector("div[data-name=base]")
     await page.click("div[data-name=base]")
     
+    logger.info("Open menu")
     await page.waitForSelector('button[aria-label="Open menu"]');
     // user_menu_btn = await page.$('button[aria-label="Open menu"]');
     await page.click('button[aria-label="Open menu"]')
