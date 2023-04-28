@@ -5,7 +5,7 @@ var myFormat;
 
 
 module.exports = {
-    initialize_logger(label_name){
+    initialize_logger(save_log = false){
         // Define log format
         myFormat = printf(({ level, message, label, timestamp }) => {
             switch (level) {
@@ -25,10 +25,10 @@ module.exports = {
             timestamp(),
             myFormat
         ),
-        transports: [
+        transports:  (save_log) ? [
             new winston.transports.Console(),
             new winston.transports.File({ filename: 'logs/app.log' })
-        ]
+        ] : [ new winston.transports.Console() ]
         });
 
         // // // Log messages with different levels
