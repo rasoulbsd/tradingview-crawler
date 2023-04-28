@@ -1,15 +1,15 @@
 const puppeteer = require('puppeteer-extra');
-const uuid = require('uuid');
-// const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
-var random = require('random-name')
 var userAgent = require('user-agents');
 
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
-const RecaptchaPlugin = require('puppeteer-extra-plugin-recaptcha')
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+const email = "test-rasoul@bestprojectt.ir"
+const username = "bestproj"
+const password = "x3s7Tx6AfH]4Z:"
+const url = "https://cpanel-nl-bot1.azardata.net:2083/"
 
 (async () => {
     const browser = await puppeteer.launch({ headless: false });
@@ -23,9 +23,6 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 
 async function login(page){
-    username = "bestproj"
-    password = "x3s7Tx6AfH]4Z:"
-    url = "https://cpanel-nl-bot1.azardata.net:2083/"
     await page.goto(url, 
         { waitUntil: 'domcontentloaded' }
         )
@@ -39,8 +36,6 @@ async function login(page){
 
     await page.waitForSelector('a[id=item_email_accounts]');
     await page.click('a[id=item_email_accounts]')
-
-    email = "test-rasoul@bestprojectt.ir"
 
     await page.waitForSelector('input[id=email_table_search_input]')
     await page.focus('input[id=email_table_search_input]')
