@@ -1,12 +1,12 @@
 const puppeteer = require('puppeteer-extra');
 var userAgent = require('user-agents');
-const { initialize_logger } = require("./helpers/initial.js")
+const { initialize_logger, change_logger_label } = require("./helpers/initial.js")
 
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const logger = initialize_logger("CSV_Exporter")
+var logger = initialize_logger("CSV_Exporter")
 
 const email = "desab19561@loongwin.com";
 const username = "BrearLaudf92cafd6a3d249968bcd38b6e0";
@@ -14,22 +14,28 @@ const password = "f92cafd6-a3d2-4996-8bcd-38b6e08dd0e2123!";
 const value = 1000;
 
 (async () => {
+    logger = change_logger_label(logger, "Login")
+      
+    logger.info("Starting CSV Exporter")
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.setUserAgent(userAgent.random().toString())
 
+    logger.info("Logging to the account")
     var [res, signed_in_page] = await tv_login(browser, email, username, password)
     if (res == 'Done'){
-        console.log('\x1b[32m%s\x1b[0m', "Login Successful!") //green
+        logger.info("Login Successful!")
     }
     else{
-        console.log("\x1b[31m%s\x1b[0m", "Error in logging in") //red
+        logger.error("Error in logging in")
         process.exit()
     }
 
+    logger = change_logger_label(logger, "TV-Operations")
+    logger.info("Starting TV Operations")
     res = await tv_functions(signed_in_page, value);
     if(res == 'Done'){
-        console.log(`The account for value: ${value} has been created successfully!`)
+        logger.info(`The account for value: ${value} has been created successfully!`)
     }
 
 })();
@@ -69,7 +75,7 @@ async function tv_login(browser, email, username, password){
 }
 
 async function tv_functions(page, value){
-    await sleep(10000)
+    // await sleep(10000)
     await page.waitForSelector("div[data-name=base]")
     await page.click("div[data-name=base]")
     

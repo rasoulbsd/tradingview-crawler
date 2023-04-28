@@ -1,11 +1,13 @@
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
 
+var myFormat;
+
 
 module.exports = {
     initialize_logger(label_name){
         // Define log format
-        const myFormat = printf(({ level, message, label, timestamp }) => {
+        myFormat = printf(({ level, message, label, timestamp }) => {
             switch (level) {
                 case 'error':
                   return `${timestamp}, [${label}] \x1b[31m${level.toUpperCase()}:\x1b[0m ${message}`;
@@ -19,7 +21,7 @@ module.exports = {
         // Create logger instance
         const logger = winston.createLogger({
         format: combine(
-            label({ label: label_name }),
+            label({ label: "TradingView Crawler" }),
             timestamp(),
             myFormat
         ),
@@ -37,6 +39,14 @@ module.exports = {
         // logger.debug('This is a debug message');
         // logger.silly('This is a silly message');
 
+        return logger;
+    },
+    change_logger_label(logger, label){
+        logger.format = combine(
+            winston.format.label({ label: label }),
+            timestamp(),
+            myFormat
+        )
         return logger;
     }
 }
