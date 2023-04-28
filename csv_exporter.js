@@ -33,7 +33,7 @@ const value = 1000;
     }
 
     logger = change_logger_label(logger, "Login")
-    var [res, signed_in_page] = await tv_login(browser, email, password)
+    var [res, signed_in_page] = await tv_login(page, email, password)
     if (res == 'Done'){
         logger.info("Login Successful!")
     }
@@ -42,12 +42,10 @@ const value = 1000;
         process.exit()
     }
 
-    logger = change_logger_label(logger, "TV-Operations")
-    res = await tv_functions(signed_in_page, value);
-    if(res == 'Done'){
-        logger.info(`The account for value: ${value} has been created successfully!`)
-    }
+    logger = change_logger_label(logger, "PaperTrading")
+    let paper_trading_page = await paper_trading_opener(signed_in_page,);
 
+    res = await set_prop(paper_trading_page, value)
 })();
 
 async function tv_login(page, email, password){
@@ -73,7 +71,7 @@ async function tv_login(page, email, password){
     await page.focus('input[name=password]')
     await page.keyboard.type(password)
 
-    logger.info("Click on remember me checkbox")
+    logger.info("Click on remember me checkbox: disable it")
     await page.click("input[name=remember]")
 
     logger.info("Submiting login form")
@@ -82,48 +80,61 @@ async function tv_login(page, email, password){
     return ['Done', page]
 }
 
-async function tv_functions(page, value){
-    logger.info("Starting TV Operations")
-    await page.waitForSelector("div[data-name=base]")
-    await page.click("div[data-name=base]")
-    
-    logger.info("Open menu")
-    await page.waitForSelector('button[aria-label="Open menu"]');
-    // user_menu_btn = await page.$('button[aria-label="Open menu"]');
-    await page.click('button[aria-label="Open menu"]')
-    
+async function paper_trading_opener(page){
+    logger.info("Open top left menu")
+    let attempts = 0;
+    do{
+        await page.waitForSelector('button[aria-label="Open menu"]');
+        await page.click('button[aria-label="Open menu"]')
 
-    await page.waitForSelector("div[aria-label=Menu]")
-    sign_in_btn = await page.$("div[aria-label=Menu] button")
-    await sign_in_btn.evaluate((el) => el.click());
+        opened_menu = await page.$("div[aria-label=Menu]")
+        attempts += 1;
+        if(attempts >= 58){
+            logger.error("Timeout in openning menu")
+            process.exit()
+        }
+        await sleep(500)
+    }while(opened_menu == null)
 
-    await page.waitForSelector('a[data-main-menu-dropdown-track-id="Chart+"]')
-    email_btn = await page.$('a[data-main-menu-dropdown-track-id="Chart+"]');
-    await email_btn.click()
+    logger.info("Click on the first item in the menu: Products")
+    const products_btn = await page.$("div[aria-label=Menu] button")
+    await products_btn.evaluate((el) => el.click());
 
-    await page.waitForSelector("div[data-name=order-panel-button]")    // order_panel_btn = await page.$('div[data-name=order-panel-button]');
-    await sleep(1000)
-    await page.click('div[data-name=order-panel-button]')
+    logger.info("Click on the first product: Supercharts")
+    await page.waitForSelector('div[data-name="menu-inner"] a')
+    supercharts_btn = await page.$('div[data-name="menu-inner"] a');
+    await supercharts_btn.click()
 
-    console.log("Clicking on connect button")
+    logger.info("Clicking on order panel button")
+    await page.waitForSelector("[data-name=order-panel-button]")    // order_panel_btn = await page.$('div[data-name=order-panel-button]');
+    await sleep(4000)
+    await page.click('[data-name=order-panel-button]')
+
+    logger.info("Clicking on broker connect button")
     await page.waitForSelector("div[data-broker=Paper] button")
-
     connect_btn = await page.$("div[data-broker=Paper] button")
-    await page.evaluate((el) => el.click(), connect_btn);
+    await connect_btn.evaluate((el) => el.click());
 
+    logger.info("Clicking on broker login submit button")
     await page.waitForSelector("button[name=broker-login-submit-button]")
     await page.click("button[name=broker-login-submit-button]")
 
+    logger.info("Clicking on paper trading")
     await page.waitForSelector("div.js-account-manager-header span")
     paper_trading_btn = await page.$("div.js-account-manager-header span")
+    await paper_trading_btn.evaluate((el) => el.click());
 
-    await page.evaluate((el) => el.click(), paper_trading_btn);
+    logger.info("Successfully opened to paper trading menu.")
+    return page;
+}
 
+async function set_prop(page, value){
+    logger.info("Cl")
     await page.waitForSelector("div[data-name=menu-inner]>div>span")
     await page.click("div[data-name=menu-inner]>div>span")
     
-    await sleep(4000)
-
+    // await sleep(4000)
+    await page.waitForSelector('input[inputmode="numeric"]')
     await page.focus('input[inputmode="numeric"]')
     console.log(`Value: ${value}`)
     await page.keyboard.type(value)
@@ -153,4 +164,9 @@ async function tv_functions(page, value){
 
     return ['Done', page]
     await sleep(500000);
+
+}
+
+async function csv_exporter(page){
+
 }
