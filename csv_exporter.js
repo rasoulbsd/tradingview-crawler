@@ -32,7 +32,6 @@ const value = 1000;
         process.exit()
     }
 
-    logger = change_logger_label(logger, "Login")
     var [res, signed_in_page] = await tv_login(page, email, password)
     if (res == 'Done'){
         logger.info("Login Successful!")
@@ -42,13 +41,14 @@ const value = 1000;
         process.exit()
     }
 
-    logger = change_logger_label(logger, "PaperTrading")
     let paper_trading_page = await paper_trading_opener(signed_in_page,);
 
-    res = await set_prop(paper_trading_page, value)
+    await csv_exporter(paper_trading_page)
+    // res = await set_prop(paper_trading_page, value)
 })();
 
 async function tv_login(page, email, password){
+    logger = change_logger_label(logger, "Login")
     logger.info("Open user menu")
     await page.waitForSelector('button[aria-label="Open user menu"]');
     // user_menu_btn = await page.$('button[aria-label="Open user menu"]');
@@ -81,6 +81,7 @@ async function tv_login(page, email, password){
 }
 
 async function paper_trading_opener(page){
+    logger = change_logger_label(logger, "PaperTrading")
     logger.info("Open top left menu")
     let attempts = 0;
     do{
@@ -129,6 +130,7 @@ async function paper_trading_opener(page){
 }
 
 async function set_prop(page, value){
+    logger = change_logger_label(logger, "PaperTrading")
     logger.info("Cl")
     await page.waitForSelector("div[data-name=menu-inner]>div>span")
     await page.click("div[data-name=menu-inner]>div>span")
@@ -152,7 +154,6 @@ async function set_prop(page, value){
     await page.waitForSelector("button#Market")
     await page.click("button#Market")
 
-
     checkboxs = await page.$$("input[type=checkbox]")
     await checkboxs[0].evaluate((el) => el.click());
     await checkboxs[1].evaluate((el) => el.click());
@@ -168,5 +169,21 @@ async function set_prop(page, value){
 }
 
 async function csv_exporter(page){
+    logger = change_logger_label(logger, "CSV-Export")
+    logger.info("Clicking on Exporting data")
+    await page.waitForSelector('div[data-name="menu-inner"]>div')
+    let export_btn = await page.$$('div[data-name="menu-inner"]>div')
+    await export_btn[4].click()
+
+    logger.info("Selecting History")
+    await page.waitForSelector('span[data-role="listbox"]')
+    await page.click('span[data-role="listbox"]')
+    await page.waitForSelector('div#id_item_History')
+    await page.click('div#id_item_History')
+
+    logger.info("Clicking on export submit button")
+    await page.click('button[name="submit"]')
+
+
 
 }
