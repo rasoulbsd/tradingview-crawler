@@ -13,11 +13,10 @@ Use the command below to start creating tradingview account in your local machin
 ```
 npm run tv:create_account
 ```
-# Note:
-Be aware that it must be run in local machine because you may face `reCaptcha` during account creation and you should have a graphic user interface and the code can not be run headless. Also consider that when you see the reCapthca button, you have 60sec to solve that but it is recommended to solve it under 30sec, then you must click on the submit button under that.
+### Note:
+1. Be aware that it must be run in local machine because you may face `reCaptcha` during account creation and you should have a graphic user interface and the code can not be run headless. Also consider that when you see the reCapthca button, you have 60sec to solve that but it is recommended to solve it under 30sec, then you must click on the submit button under that.
 
-# Note:
-Because it is running locally, you may encounter network errors based on your network status. In that case, the problem should be solved with retrying, changing network or changing VPN based on your situation.
+2. Because it is running locally, you may encounter network errors based on your network status. In that case, the problem should be solved with retrying, changing network or changing VPN based on your situation.
 
 ## Functionalites
 There are several functions you can use with `npm`:
