@@ -42,6 +42,6 @@ module.exports = {
 
         // ToDo: Send to db
         // return [username, password, firstName, lastName];
-        return (username + "@" + address)
+        return [(username + "@" + address), username, password]
     }
 }

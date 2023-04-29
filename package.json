@@ -4,7 +4,8 @@
   "description": "crawler for tradingview.com",
   "main": "src/create_account.js",
   "scripts": {
-    "tv:create_account": "node src/create_account.js",
+    "tv:create_email": "node src/create_email.js",
+    "tv:create_account": "node src/tv_create_account.js",
     "tv:set_prop": "node",
     "tv:csv_export": "node src/csv_export.js"
   },
