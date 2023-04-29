@@ -59,5 +59,19 @@ module.exports = {
             myFormat
         )
         return logger;
+    },
+
+    get_initial_args(){
+        const VALUE_ARG = process.argv.slice(2)[0];
+    
+        if (VALUE_ARG == undefined) {
+            console.log(
+                "\x1b[31m%s\x1b[0m",
+                `Please enter a value for prop as an argument\n`
+            ); //red
+            process.exit();
+        }
+
+        return VALUE_ARG;
     }
 }

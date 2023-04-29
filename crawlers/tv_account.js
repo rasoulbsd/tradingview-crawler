@@ -2,7 +2,7 @@ const { initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
 
 module.exports = {
-    async tv_create_account(page, email, username, password, firstName, lastName){
+    async tv_create_account(page, email, username, password, firstName='', lastName=''){
         const url = "https://www.tradingview.com/"
         await page.goto(url, 
             { waitUntil: 'domcontentloaded' }

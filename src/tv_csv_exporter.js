@@ -4,6 +4,7 @@ const { paper_trading_opener, csv_exporter } = require("../crawlers/tv_operation
 const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
 
+// ToDo: Read from dotenv and DB
 const email = "desab19561@loongwin.com";
 const password = "f92cafd6-a3d2-4996-8bcd-38b6e08dd0e2123!";
 
