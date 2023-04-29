@@ -2,9 +2,11 @@
   "name": "tradingview-crawler",
   "version": "1.0.0",
   "description": "crawler for tradingview.com",
-  "main": "gmail-creator.js",
+  "main": "src/create_account.js",
   "scripts": {
-    "main": "node main.js"
+    "tv:create_account": "node src/create_account.js",
+    "tv:set_prop": "node",
+    "tv:csv_export": "node src/csv_export.js"
   },
   "repository": {
     "type": "git",
