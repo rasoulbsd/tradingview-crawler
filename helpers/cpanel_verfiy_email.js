@@ -11,6 +11,11 @@ const username = "bestproj"
 const password = "x3s7Tx6AfH]4Z:"
 const url = "https://cpanel-nl-bot1.azardata.net:2083/"
 
+module.exports = {
+    async verify_email(){
+        
+    }
+}
 (async () => {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();

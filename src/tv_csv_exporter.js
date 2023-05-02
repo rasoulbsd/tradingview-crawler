@@ -1,4 +1,4 @@
-const { tv_login } = require("../crawlers/account.js")
+const { tv_login } = require("../crawlers/tv_account.js")
 const { paper_trading_opener, csv_exporter } = require("../crawlers/tv_operations.js")
 
 const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js")
