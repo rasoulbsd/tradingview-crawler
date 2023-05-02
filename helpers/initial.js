@@ -11,7 +11,7 @@ var myFormat;
 
 module.exports = {
     async initial_crawler_config(){
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({ headless: 'new' });
         const page = await browser.newPage();
         await page.setUserAgent(userAgent.random().toString());
         return page;
