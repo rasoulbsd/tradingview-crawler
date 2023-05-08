@@ -14,7 +14,7 @@ module.exports = {
         const browser = await puppeteer.launch(
             {
                 headless,
-                args: [`--window-size=${options.width},${options.height}`] // new option
+                args: [`--window-size=1920,1080`] // new option
 
                 // executablePath: '/Applications/Chromium.app' 
             });
