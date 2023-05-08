@@ -15,7 +15,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     logger = change_logger_label(logger, "TV_CREATE_ACC");
     logger.info("Starting")
 
-    const [email, username, password, firstname, lastname] = await create_email();
+    const [email, username, password, acc_pass, firstname, lastname] = await create_email();
 
     logger = change_logger_label(logger, "TV_INITIAL_CRAWLER")
     // var page;
@@ -34,21 +34,21 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     console.log(password)
     console.log(firstname)
     console.log(lastname)
-    res = await tv_create_account(page, email, username, `${password}1234aschnuwe*`, firstname, lastname, state=1, temp_mail=false);
+    res = await tv_create_account(page, email, username, acc_pass, firstname, lastname, state=1, temp_mail=false);
     logger.info(`Response of creating account first stage: ${res}`)
 
     // verify
     const after_verification_page = await cpanel_verfiy_email(browser, email)
     logger.info(`End of email verification`)
 
-    res = await tv_create_account(after_verification_page, email, username, `${password}1234aschnuwe*`, firstname, lastname, state=2, temp_mail=false);
+    res = await tv_create_account(after_verification_page, email, username, acc_pass, firstname, lastname, state=2, temp_mail=false);
     logger.info(`Response of creating account final stage: ${res}`)
 
-    res = await register_API(email, password, acc_pass=`${password}1234aschnuwe*`)
+    res = await register_API(email, password, acc_pass)
     logger.info(`Response of registerAPI: ${res}`)
 
     logger.info(`Writing verified account to verified_accounts.txt`)
-    await write_to_file(email, username, password, firstname, lastname);
+    await write_to_file(email, username, password, acc_pass, firstname, lastname);
 
     // res = await set_prop(page, value)
     // logger.info(`Response of setting prop: ${res}`)
