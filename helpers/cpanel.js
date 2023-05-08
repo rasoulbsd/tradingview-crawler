@@ -50,12 +50,14 @@ module.exports = {
     },
 
     async write_to_file(email, username, password, firstname, lastname){
-        try {
-        await fs.promises.writeFile('./verified_accounts.txt', `${email}, ${username}, ${password}, ${firstname}, ${lastname}\n`);
-            // console.log('Data has been appended to the file.');
-          } catch (err) {
-            console.error(err);
-        }
+        await fs.appendFileSync('./verified_accounts.txt', `${email}, ${username}, ${password}, ${firstname}, ${lastname}\n`, 'utf8');
+        // console.log("Data is appended to file successfully.")
+        // try {
+        // await fs.promises.writeFile('./verified_accounts.txt', `${email}, ${username}, ${password}, ${firstname}, ${lastname}\n`);
+        //     // console.log('Data has been appended to the file.');
+        //   } catch (err) {
+        //     console.error(err);
+        // }
     }
 }
 
