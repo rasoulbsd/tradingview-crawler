@@ -78,12 +78,6 @@ module.exports = {
 
         logger.info("Go to tv website")
         const url = "https://www.tradingview.com/"
-        await page.setViewport({
-            width: 1200,
-            height: 720,
-            deviceScaleFactor: 1,
-            isLandScape: true
-        });
         await page.goto(url, 
             { waitUntil: 'domcontentloaded' }
             )
