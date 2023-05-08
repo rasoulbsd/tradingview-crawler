@@ -15,7 +15,9 @@ module.exports = {
             {
                 headless,
                 args: [`--window-size=1920,1080`] // new option
-
+                // args:[
+                //     '--start-maximized' // you can also use '--start-fullscreen'
+                //  ]
                 // executablePath: '/Applications/Chromium.app' 
             });
         const page = await browser.newPage();
