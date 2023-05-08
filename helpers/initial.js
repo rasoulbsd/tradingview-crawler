@@ -19,10 +19,10 @@ module.exports = {
         const page = await browser.newPage();
         await page.setUserAgent(userAgent.random().toString());
         await page.setViewport({
-            width: 1920,
+            width: 1200,
             height: 1080,
-            deviceScaleFactor: 1,
-            isLandScape: true
+            // deviceScaleFactor: 1,
+            // isLandScape: true
         });
         return [page, browser];
     },
