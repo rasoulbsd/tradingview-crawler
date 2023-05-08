@@ -4,3 +4,10 @@ sdf1002@sarmayedigital.com, sdf1002, b00d91ee-cb7e-43af-8699-347d3b5e932b123!, S
 sdf1003@sarmayedigital.com, sdf1003, 8e43c651-3019-4a5b-bcb4-a3e8928cbf5e123!, Ginny, Idonna
 sdf1005@sarmayedigital.com, sdf1005, 8f113e15-7435-4b6f-818e-49f538965115123!13e15-7, 8f113e15-7435-4b6f-818e-49f538965115123!, Felicle, Aeriel
 sdf1009@sarmayedigital.com, sdf1009, 34f9a5e5-8b123!9a5e5-, 34f9a5e5-8b123!, Sonnie, Fidel
+sdf1012@sarmayedigital.com, sdf1012_sarmayedigital, da58e840-ba123!8e840-, da58e840-ba123!, Perry, Lazarus
+sdf1013@sarmayedigital.com, sdf1013_sarmayedigital, 95545ee0-e3123!45ee0-, 95545ee0-e3123!, Herminia, Pauline
+sdf1015@sarmayedigital.com, sdf1015_sarmayedigital, 9f24d7bb-b4123!4d7bb-, 9f24d7bb-b4123!, Merissa, Silvestro
+sdf1016@sarmayedigital.com, sdf1016_sarmayedigital, aac41cf1-c8123!41cf1-, aac41cf1-c8123!, Martelle, Claiborne
+sdf1017@sarmayedigital.com, sdf1017_sarmayedigital, 38a150cd-01123!150cd-, 38a150cd-01123!, Costanza, Maiah
+sdf1019@sarmayedigital.com, sdf1019_sarmayedigital, 7a1b047a-03123!b047a-, 7a1b047a-03123!, Loretta, Parrisch
+sdf1020@sarmayedigital.com, sdf1020_sarmayedigital, 90fcaee8-79123!caee8-, 90fcaee8-79123!, Jennette, Renner
