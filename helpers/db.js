@@ -15,7 +15,7 @@ module.exports = {
         }
         };
 
-        axios.post('https://sarmayedigital.com/bot/api/?action=register', qs.stringify(data), config)
+        await axios.post('https://sarmayedigital.com/bot/api/?action=register', qs.stringify(data), config)
         .then((response) => {
             console.log(response.data);
         })

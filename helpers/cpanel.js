@@ -22,7 +22,8 @@ module.exports = {
         const firstName= random.first()
         const lastName = random.last()
         // let username = user || (firstName + "_" + lastName + "_" + id.slice(0, 5).replace(/-/g, '.')).replaceAll(".", '');
-        let password = pass || `${id}123!`;
+        let acc_pass = pass || `${id.slice(0,11)}123!`;
+        let password = pass || `${id.slice(0,11)}123!${id.slice(3, 9)}`
         const username = await username_generator()
         const config = {
             params: {
@@ -46,11 +47,11 @@ module.exports = {
 
         // ToDo: Send to db
         // return [username, password, firstName, lastName];
-        return [(username + "@" + domain), username, password, firstName, lastName]
+        return [(username + "@" + domain), `${username}_sarmayedigital`, password, acc_pass, firstName, lastName]
     },
 
-    async write_to_file(email, username, password, firstname, lastname){
-        await fs.appendFileSync('./verified_accounts.txt', `${email}, ${username}, ${password}, ${firstname}, ${lastname}\n`, 'utf8');
+    async write_to_file(email, username, password, acc_pass, firstname, lastname){
+        await fs.appendFileSync('./verified_accounts.txt', `${email}, ${username}, ${password}, ${acc_pass}, ${firstname}, ${lastname}\n`, 'utf8');
         // console.log("Data is appended to file successfully.")
         // try {
         // await fs.promises.writeFile('./verified_accounts.txt', `${email}, ${username}, ${password}, ${firstname}, ${lastname}\n`);
