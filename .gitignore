@@ -38,7 +38,7 @@ log.txt
 log_resend.txt
 */log.txt
 */log_resend.txt
-*.txt
+# *.txt
 
 crawlers/.DS_Store
 credentials.json

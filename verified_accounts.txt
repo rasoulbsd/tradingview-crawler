@@ -1,0 +1,4 @@
+sdf1000@sarmayedigital.com, sdf1000, 70940171-e891-45dc-9b42-80eda80d833b123!, Marthe, Kreda
+sdf1001@sarmayedigital.com, sdf1001, 30f5d51a-af0a-47b7-8482-031c712780f6123!, Gisela, Berkin
+sdf1002@sarmayedigital.com, sdf1002, b00d91ee-cb7e-43af-8699-347d3b5e932b123!, Sibelle, Cline
+sdf1003@sarmayedigital.com, sdf1003, 8e43c651-3019-4a5b-bcb4-a3e8928cbf5e123!, Ginny, Idonna
