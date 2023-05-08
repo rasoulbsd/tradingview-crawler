@@ -10,20 +10,24 @@ var myFormat;
 
 
 module.exports = {
-    async initial_crawler_config(){
-        const browser = await puppeteer.launch({ headless: 'new' });
+    async initial_crawler_config(headless=false){
+        const browser = await puppeteer.launch(
+            {
+                headless,
+                // executablePath: '/Applications/Chromium.app' 
+            });
         const page = await browser.newPage();
         await page.setUserAgent(userAgent.random().toString());
-        return page;
+        return [page, browser];
     },
     initial_logger(save_log = false){
         // Define log format
         myFormat = printf(({ level, message, label, timestamp }) => {
             switch (level) {
                 case 'error':
-                  return `${timestamp}, [${label}] \x1b[31m${level.toUpperCase()}:\x1b[0m ${message}`;
+                  return `${timestamp} [${label}] \x1b[31m${level.toUpperCase()}:\x1b[0m ${message}`;
                 case 'warn':
-                  return `${timestamp}, [${label}] \x1b[33m${level.toUpperCase()}:\x1b[0m ${message}`;
+                  return `${timestamp} [${label}] \x1b[33m${level.toUpperCase()}:\x1b[0m ${message}`;
                 default:
                   return `${timestamp} [${label}] \x1b[32m${level.toUpperCase()}:\x1b[0m ${message}`;
               }
