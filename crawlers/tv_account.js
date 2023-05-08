@@ -41,29 +41,33 @@ module.exports = {
             await page.keyboard.type(password)
             await page.waitForSelector('input[name=gdpr]')
             await (await page.$("input[name=gdpr]")).click()
-        
-            logger.warn("Waiting for captcha!")
-            console.log("Waiting for user to resolve captcha.")
-            await page.waitForSelector(".tv-signin-dialog__resend")
+
+            // ToDo: handle error for incorrect credentials
+            logger.warn("Waiting for user to solve captcha!")
+            // console.log("Waiting for user to resolve captcha.")
+            await page.waitForSelector(".tv-signin-dialog__resend", {timeout: 60000})
             if(temp_mail == true){
                 logger.warn("Waiting for manual email activation!")
-                console.log("Waiting for user to Activate the email")
+                // console.log("Waiting for user to Activate the email")
                 console.log("\x1b[33m%s\x1b[0m", "\tTemporary Passed!")
             }
         }
-        if(state == "2"){
+        else if(state == 2){
             logger.info("Continue account creation")
             logger.info("Insert firstname and lastname")
             await page.waitForSelector('input[name=first_name]')
             await page.focus('input[name=first_name]')
-            await page.keyboard.type(first_name)
+            await page.keyboard.type(firstName)
 
             await page.waitForSelector('input[name=last_name]')
             await page.focus('input[name=last_name]')
-            await page.keyboard.type(last_name)
+            await page.keyboard.type(lastName)
 
             logger.info("Click on marketing emails button")
             await page.click("input[name=marketing_emails]")
+
+            logger.info("Click on submit button")
+            await page.click('button[type="submit"]')
         }
     
         return 'Done'
@@ -71,6 +75,19 @@ module.exports = {
 
     async tv_login(page, email, password){
         logger = change_logger_label(logger, "Login")
+
+        logger.info("Go to tv website")
+        const url = "https://www.tradingview.com/"
+        await page.setViewport({
+            width: 1200,
+            height: 720,
+            deviceScaleFactor: 1,
+            isLandScape: true
+        });
+        await page.goto(url, 
+            { waitUntil: 'domcontentloaded' }
+            )
+
         logger.info("Open user menu")
         await page.waitForSelector('button[aria-label="Open user menu"]');
         // user_menu_btn = await page.$('button[aria-label="Open user menu"]');
