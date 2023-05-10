@@ -7,6 +7,7 @@ module.exports = {
     async paper_trading_opener(page){
         logger = change_logger_label(logger, "PAPER-TRADING");
         logger.info("Open top left menu");
+        // await sleep(50000)
         let attempts = 0;
         do{
             await page.waitForSelector('button[aria-label="Open menu"]');
@@ -41,7 +42,7 @@ module.exports = {
         // await connect_btn.evaluate((el) => el.click());
 
         logger.info("Clicking on papertrading connect button")
-        await page.waitForSelector('div[data-broker="Paper"] button')
+        await page.waitForSelector('div[data-broker="Paper"] button', { setTimeout:90000 })
         await page.click('div[data-broker="Paper"] button')
 
         logger.info("Clicking on broker login submit button")
@@ -125,7 +126,16 @@ module.exports = {
         return ['Done', page]    
     },
 
-    async csv_exporter(page){
+    async csv_exporter(page, email){
+        const client = await page.target().createCDPSession()
+        await client.send('Page.setDownloadBehavior', {
+                            behavior: 'allow',
+                            downloadPath: `./downloads/${email.split('@')[0]}-${new Date()}`,
+                        })
+        // await page._client.send('Page.setDownloadBehavior', {
+        //     behavior: 'allow',
+        //     downloadPath: "." 
+        // });
         logger = change_logger_label(logger, "CSV-Export")
         logger.info("Clicking on Exporting data")
         await page.waitForSelector('div[data-name="menu-inner"]>div')
@@ -140,5 +150,18 @@ module.exports = {
 
         logger.info("Clicking on export submit button")
         await page.click('button[name="submit"]')
+        // await https.get(imgUrl, res => {
+        //     const stream = fs.createWriteStream('somepic.png');
+        //     res.pipe(stream);
+        //     stream.on('finish', () => {
+        //         stream.close();
+        //     })
+        // })
+        // await page.on('request', req => {
+        //     if (req.url() === urlFile) {
+        //         const file = fs.createWriteStream('./file.pdf');
+        //         https.get(req.url(), response => response.pipe(file));
+        //     }
+        // });
     }
 }
