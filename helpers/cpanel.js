@@ -17,13 +17,12 @@ module.exports = {
         logger = change_logger_label(logger, "EMAIL_CREATION")
         logger.info("Startin creation of email in cpanel");
         const address = addr || 'https://cpanel-nl-bot1.azardata.net:2083/execute/Email/add_pop';
-        const id = uuid.v4();
         random()
         const firstName= random.first()
         const lastName = random.last()
         // let username = user || (firstName + "_" + lastName + "_" + id.slice(0, 5).replace(/-/g, '.')).replaceAll(".", '');
-        let acc_pass = pass || `${id.slice(0,11)}123!`;
-        let password = pass || `${id.slice(0,11)}123!${id.slice(3, 9)}`
+        let acc_pass = pass || `${uuid.v4().slice(0,11)}!`;
+        let password = pass || `${uuid.v4().slice(0,11)}!${uuid.v4().slice(3, 9)}`
         const username = await username_generator()
         const config = {
             params: {

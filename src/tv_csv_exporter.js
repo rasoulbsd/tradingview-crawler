@@ -3,17 +3,14 @@ const { paper_trading_opener, csv_exporter } = require("../crawlers/tv_operation
 
 const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
-
-// ToDo: Read from dotenv and DB
-const email = "desab19561@loongwin.com";
-const password = "f92cafd6-a3d2-4996-8bcd-38b6e08dd0e2123!";
+const [email, password] = get_initial_args();
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
     logger = change_logger_label(logger, "INITIAL")
-    var page;
     try{
         logger.info("Opening browser")
-        page = await initial_crawler_config()
+        var [page, browser] = await initial_crawler_config(headless='new', width=980,height=766)
     }
     catch(err){
         logger.error(err.message)
@@ -43,5 +40,21 @@ const password = "f92cafd6-a3d2-4996-8bcd-38b6e08dd0e2123!";
 
     let paper_trading_page = await paper_trading_opener(signed_in_page);
 
-    await csv_exporter(paper_trading_page)
+    await csv_exporter(paper_trading_page, email)
+    // await sleep(100000)
+    console.log("Done!")
+    await browser.close()
 })();
+
+
+function get_initial_args(){
+    const username = process.argv.slice(2)[0];
+    const password = process.argv.slice(2)[1];
+
+    if(username == undefined || password == undefined){
+      console.log('\x1b[31m%s\x1b[0m',`Please enter email and password as an argument correctly\n`) //red
+      process.exit();
+    }
+  
+    return [username, password];
+  }
