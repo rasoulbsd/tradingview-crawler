@@ -81,7 +81,7 @@ module.exports = {
         logger.info(`Select input field in the popup modal and set value: ${value}`)
         await page.waitForSelector('div[data-name="trading-paper-reset"] input')
         await page.focus('div[data-name="trading-paper-reset"] input')
-        await page.keyboard.type(value)
+        await page.keyboard.type(value.toString())
 
         logger.info("Clicking on reset button")
         await page.click('button[name="submit"]')
@@ -90,40 +90,32 @@ module.exports = {
     },
 
     async create_initial_transaction(page){
-        logger = change_logger_label(logger, "SET-PROP")
-        logger.info("Cl")
-        await page.waitForSelector("div[data-name=menu-inner]>div>span")
-        await page.click("div[data-name=menu-inner]>div>span")
+        logger = change_logger_label(logger, "CREATE_TRANS")
+        logger.info("Clicking on market button")
+        await page.waitForSelector("#Market")
+        await page.click("#Market")
 
-        // await sleep(4000)
-        await page.waitForSelector('input[inputmode="numeric"]')
-        await page.focus('input[inputmode="numeric"]')
-        console.log(`Value: ${value}`)
-        await page.keyboard.type(value)
+        logger.info("Check two checkboxes")
+        await page.waitForSelector('input[type="checkbox"]')
+        checkboxes = await page.$$('input[type="checkbox"]')
+        await checkboxes[0].click()
+        await checkboxes[1].click()
 
-        await page.waitForSelector("button[name=submit]")
-        await page.click("button[name=submit]")
+        logger.info("Click on Buy button")
+        await page.waitForSelector('div[data-name="order-panel"] button')
+        order_panel_btns = await page.$$('div[data-name="order-panel"] button')
+        await order_panel_btns[4].click("button[name=submit]")
 
-        do{
-            await page.click('div[data-name="order-panel-button"]')
-            clicked = await page.$('button#Market')
-            await sleep(200)
-        }while(clicked == null)
-        console.log("The button for order panel clicked!")
+        logger.info("Closing transaction: click on cross")
+        await page.waitForSelector('div[title="Close"]')
+        cross_btn = await page.$('div[title="Close"]')
+        await cross_btn.click()
 
-        await page.waitForSelector("button#Market")
-        await page.click("button#Market")
+        logger.info("Click on close position")
+        await page.waitForSelector('button[name="submit"]')
+        await page.click('button[name="submit"]')
 
-        checkboxs = await page.$$("input[type=checkbox]")
-        await checkboxs[0].evaluate((el) => el.click());
-        await checkboxs[1].evaluate((el) => el.click());
-
-        await page.click('div[data-name="order-panel"] > div > div > div > button')
-        await sleep(10000);
-        console.log('\x1b[32m%s\x1b[0m', "Order Sent") // green
-        await sleep(500000);
-
-        return ['Done', page]    
+        return 'Created'
     },
 
     async csv_exporter(page, email){

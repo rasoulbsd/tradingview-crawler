@@ -14,9 +14,9 @@ module.exports = {
         const browser = await puppeteer.launch(
             {
                 headless,
-                args: [`--window-size=${width},${height},
+                args: [`--window-size=${width},${height}`,
                         '--disable-setuid-sandbox', '--no-sandbox'        
-                    `] // new option
+                    ] // new option
                 // args:[
                 //     '--start-maximized' // you can also use '--start-fullscreen'
                 //  ]
