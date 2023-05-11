@@ -1,0 +1,295 @@
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T09:52:44.783Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T09:52:44.784Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T09:52:53.620Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T09:52:53.622Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1306@sarmayedigital.com
+sdf1306_sarmayedigital
+bb5637a7-9c123!637a7-
+Alyse
+Ricoriki
+2023-05-10T09:52:54.838Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T09:52:58.940Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T09:52:59.785Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T09:53:00.409Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T09:53:01.005Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T09:53:01.072Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T09:53:01.918Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+2023-05-10T09:53:44.821Z [TV_INITIAL_CRAWLER] INFO: Response of creating account first stage: Done
+2023-05-10T09:53:44.973Z [CPANEL_EMAIL_VERIFI] INFO: Go to Cpanel login page
+2023-05-10T09:53:46.474Z [CPANEL_EMAIL_VERIFI] INFO: Inserting cpanel credentials
+2023-05-10T09:53:47.091Z [CPANEL_EMAIL_VERIFI] INFO: Go to email page in cpanel
+2023-05-10T09:53:49.910Z [CPANEL_EMAIL_VERIFI] INFO: Search for email
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `input[id=email_table_search_input]` failed: Waiting failed: 30000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T10:50:39.577Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T10:50:39.590Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T10:50:51.123Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T10:50:51.124Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1354@sarmayedigital.com
+sdf1354_sarmayedigital
+af7db267-97123!db267-
+Amara
+Cassidy
+2023-05-10T10:50:52.878Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T10:50:57.885Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T10:50:58.107Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T10:50:58.495Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T10:50:59.460Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T10:50:59.562Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T10:51:00.481Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `.tv-signin-dialog__resend` failed: Waiting failed: 60000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T10:50:17.195Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T10:50:17.197Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T10:51:03.832Z [EMAIL_CREATION] ERROR: Error in creating email: write EPROTO A4260000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:332:
+
+Press any key to continue . . .
+
+
+
+
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T10:48:49.211Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T10:48:49.212Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T10:49:03.751Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T10:49:03.751Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1352@sarmayedigital.com
+sdf1352_sarmayedigital
+fd7b3010-b6123!b3010-
+Theodora
+Cameron
+2023-05-10T10:49:08.776Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T10:49:17.581Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T10:49:18.371Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T10:49:18.824Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T10:49:20.275Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T10:49:21.492Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T10:49:22.311Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+2023-05-10T10:50:09.597Z [TV_INITIAL_CRAWLER] INFO: Response of creating account first stage: Done
+2023-05-10T10:50:09.827Z [CPANEL_EMAIL_VERIFI] INFO: Go to Cpanel login page
+2023-05-10T10:50:18.929Z [CPANEL_EMAIL_VERIFI] INFO: Inserting cpanel credentials
+2023-05-10T10:50:19.928Z [CPANEL_EMAIL_VERIFI] INFO: Go to email page in cpanel
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `a[id=item_email_accounts]` failed: Waiting failed: 30000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T10:34:27.335Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T10:34:27.337Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T10:34:32.899Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T10:34:32.904Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1343@sarmayedigital.com
+sdf1343_sarmayedigital
+12186994-25123!86994-
+Rosette
+Nicholson
+2023-05-10T10:34:35.436Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T10:34:42.594Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T10:34:42.776Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T10:34:43.045Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T10:34:43.599Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T10:34:43.656Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T10:34:44.343Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+ERROR: The process with PID 6108 (child process of PID 7068) could not be terminated.
+Reason: There is no running instance of the task.
+ERROR: The process with PID 13868 (child process of PID 7068) could not be terminated.
+Reason: There is no running instance of the task.
+ERROR: The process with PID 12412 (child process of PID 7068) could not be terminated.
+Reason: There is no running instance of the task.
+ERROR: The process with PID 11260 (child process of PID 7068) could not be terminated.
+Reason: There is no running instance of the task.
+ERROR: The process with PID 11652 (child process of PID 7068) could not be terminated.
+Reason: There is no running instance of the task.
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\Connection.js:61
+        _Callback_error.set(this, new Errors_js_1.ProtocolError());
+                                  ^
+
+ProtocolError: Waiting for selector `.tv-signin-dialog__resend` failed: Protocol error (Runtime.callFunctionOn): Target closed
+    at new Callback (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\Connection.js:61:35)
+    at CallbackRegistry.create (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\Connection.js:106:26)
+    at Connection._rawSend (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\Connection.js:216:26)
+    at CDPSessionImpl.send (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\Connection.js:425:78)
+    at next (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-extra-plugin-stealth\evasions\sourceurl\index.js:34:41)
+    at CDPSessionImpl.send (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-extra-plugin-stealth\evasions\sourceurl\index.js:75:16)
+    at ExecutionContext._ExecutionContext_evaluate (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\ExecutionContext.js:240:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CDPJSHandle.evaluateHandle (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\JSHandle.js:65:16)
+    at async WaitTask.rerun (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:117:28)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T09:58:21.467Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T09:58:21.468Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T09:58:32.246Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T09:58:32.247Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1308@sarmayedigital.com
+sdf1308_sarmayedigital
+1638d064-f3123!8d064-
+Karla
+Moonier
+2023-05-10T09:58:33.194Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T09:58:36.153Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T09:58:38.558Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T09:58:38.794Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T09:58:39.404Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T09:58:39.475Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T09:58:40.117Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `.tv-signin-dialog__resend` failed: Waiting failed: 60000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T12:19:50.366Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T12:19:50.368Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T12:20:05.313Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T12:20:05.314Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1376@sarmayedigital.com
+sdf1376_sarmayedigital
+e5908131-7d123!08131-
+Nadya
+Duma
+2023-05-10T12:20:06.285Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T12:20:11.619Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T12:20:11.828Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T12:20:12.160Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T12:20:12.980Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T12:20:13.084Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T12:20:17.000Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `.tv-signin-dialog__resend` failed: Waiting failed: 60000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-10T12:29:51.841Z [TV_CREATE_ACC] INFO: Starting
+2023-05-10T12:29:51.843Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-10T12:30:08.732Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-10T12:30:08.765Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1388@sarmayedigital.com
+sdf1388_sarmayedigital
+a604d3db-04123!4d3db-
+Beret
+Schifra
+2023-05-10T12:30:11.553Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-10T12:30:16.120Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-10T12:30:19.693Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-10T12:30:20.047Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-10T12:30:21.278Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-10T12:30:22.356Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-10T12:30:23.239Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `.tv-signin-dialog__resend` failed: Waiting failed: 60000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+
