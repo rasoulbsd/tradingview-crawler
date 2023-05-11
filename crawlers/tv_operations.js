@@ -10,16 +10,23 @@ module.exports = {
         // await sleep(50000)
         let attempts = 0;
         do{
+            logger.warn("Open top left menu: Retrying...");
+            if(attempts >= 2){
+                if((await page.$('input[name="password"]')) != null){
+                    logger.error("Probably the username or password is incorrect!");
+                    process.exit()
+                }
+            }
             await page.waitForSelector('button[aria-label="Open menu"]');
             await page.click('button[aria-label="Open menu"]')
 
             opened_menu = await page.$("div[aria-label=Menu]")
             attempts += 1;
-            if(attempts >= 58){
+            if(attempts >= 15){
                 logger.error("Timeout in openning menu")
                 process.exit()
             }
-            await sleep(500)
+            await sleep(3000)
         }while(opened_menu == null)
     
         logger.info("Click on the first item in the menu: Products")
@@ -41,8 +48,28 @@ module.exports = {
         // connect_btn = await page.$('div[data-name="order-panel"] button')
         // await connect_btn.evaluate((el) => el.click());
 
+        logger.info("Clicking on first connect button")
+        await page.waitForSelector('button[aria-label="Order Panel"]', { timeout:90000 })
+        var connect_btn = await page.$('div[data-name="order-panel"] button')
+        try_count = 0
+        while(try_count <= 20 && connect_btn == null){
+            try{
+                await page.click('button[aria-label="Order Panel"]')
+            }
+            catch(err){
+                logger.warn("Order panel button is not clicked!: Retrying...")
+                await sleep(2000)
+                continue
+            }
+            logger.warn("Clicking on first connect button: Retrying...")
+            connect_btn = await page.$('div[data-name="order-panel"] button')
+            try_count += 1
+            await sleep(4000)
+        }
+        await connect_btn.click()
+
         logger.info("Clicking on papertrading connect button")
-        await page.waitForSelector('div[data-broker="Paper"] button', { setTimeout:90000 })
+        await page.waitForSelector('div[data-broker="Paper"] button', { timeout:90000 })
         await page.click('div[data-broker="Paper"] button')
 
         logger.info("Clicking on broker login submit button")
@@ -91,15 +118,42 @@ module.exports = {
 
     async create_initial_transaction(page){
         logger = change_logger_label(logger, "CREATE_TRANS")
+
         logger.info("Clicking on market button")
-        await page.waitForSelector("#Market")
+        var market_brn = await page.$("#Market")
+        try_count = 0;
+        while(try_count <= 20 && market_brn == null){
+            await page.click('button[aria-label="Order Panel"]')
+            await sleep(3000)
+            logger.warn("Clicking on market button: Retrying...")
+            market_brn = await page.$("#Market")
+            try_count += 1
+        }
         await page.click("#Market")
 
-        logger.info("Check two checkboxes")
-        await page.waitForSelector('input[type="checkbox"]')
-        checkboxes = await page.$$('input[type="checkbox"]')
-        await checkboxes[0].click()
-        await checkboxes[1].click()
+        logger.info("Clicking on unit")
+        await page.waitForSelector('div[data-name="order-panel"] input[inputmode="numeric"]')
+        await page.focus('div[data-name="order-panel"] input[inputmode="numeric"]')
+
+        // logger.info("Check on two checkboxes")
+        // await page.waitForSelector('input[type="checkbox"]')
+        // var attempts = 0;
+        // do{
+        //     checkboxes = await page.$$('input[type="checkbox"]')
+        //     try{
+        //         await checkboxes[0].click()
+        //         await checkboxes[1].click()
+        //         var error = false;
+        //     }
+        //     catch{
+        //         logger.warn("Check on two checkboxes: Retrying...");
+        //         await sleep(3000);
+        //         error = true;
+        //     }
+        //     attempts += 1
+        // }while(attempts <= 10 && error==true)
+        // if(attempts >= 10)
+        //     await sleep(1000000)
 
         logger.info("Click on Buy button")
         await page.waitForSelector('div[data-name="order-panel"] button')
@@ -109,11 +163,34 @@ module.exports = {
         logger.info("Closing transaction: click on cross")
         await page.waitForSelector('div[title="Close"]')
         cross_btn = await page.$('div[title="Close"]')
-        await cross_btn.click()
 
-        logger.info("Click on close position")
-        await page.waitForSelector('button[name="submit"]')
+        try{
+            articles = await page.waitForSelector('article>button', {setTimeout:5000})
+            if(articles != 0){
+                logger.error('Transaction is probably one created!')
+                return 'Created'
+                // await sleep(2000000)
+                // process.exit()
+            }
+            
+        }
+        catch(err){
+            logger.info("Click on close position")
+        }
+        await page.waitForSelector('button[name="submit"]') 
         await page.click('button[name="submit"]')
+
+        // do{
+
+        //     await cross_btn.click()
+        //     var submit_btn = await page.$('button[name="submit"]')
+        //     if(submit_btn != null)
+        //         break
+        //     await sleep(1000)
+        //     logger.warn("Click on close position: Retrying...")
+        //     try_count += 1
+        // }while(try_count <= 10 && submit_btn == null)
+
 
         return 'Created'
     },
