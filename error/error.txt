@@ -37,6 +37,47 @@ Press any key to continue . . .
 
 
 
+> tradingview-crawler@1.0.0 tv:create_account
+> node src/tv_create_account.js
+
+2023-05-11T05:05:09.174Z [TV_CREATE_ACC] INFO: Starting
+2023-05-11T05:05:09.175Z [EMAIL_CREATION] INFO: Startin creation of email in cpanel
+2023-05-11T05:05:24.377Z [EMAIL_CREATION] INFO: Successfully created email: StatusText: OK
+2023-05-11T05:05:24.378Z [TV_INITIAL_CRAWLER] INFO: Opening browser
+sdf1394@sarmayedigital.com
+sdf1394_sarmayedigital
+6de598f5-3d123!598f5-
+Dorene
+Suzetta
+2023-05-11T05:05:25.646Z [TV_CREATE_ACC] INFO: Go to tv website
+2023-05-11T05:05:30.030Z [TV_CREATE_ACC] INFO: Opening user menu
+2023-05-11T05:05:48.611Z [TV_CREATE_ACC] INFO: Click on sign in button
+2023-05-11T05:05:48.842Z [TV_CREATE_ACC] INFO: Click on sign up button
+2023-05-11T05:05:57.886Z [TV_CREATE_ACC] INFO: Click on email button
+2023-05-11T05:05:58.066Z [TV_CREATE_ACC] INFO: Inserting credentials
+2023-05-11T05:05:59.000Z [TV_CREATE_ACC] WARN: Waiting for user to solve captcha!
+2023-05-11T05:06:09.652Z [TV_INITIAL_CRAWLER] INFO: Response of creating account first stage: Done
+2023-05-11T05:06:09.889Z [CPANEL_EMAIL_VERIFI] INFO: Go to Cpanel login page
+2023-05-11T05:06:16.776Z [CPANEL_EMAIL_VERIFI] INFO: Inserting cpanel credentials
+2023-05-11T05:06:18.421Z [CPANEL_EMAIL_VERIFI] INFO: Go to email page in cpanel
+2023-05-11T05:06:23.666Z [CPANEL_EMAIL_VERIFI] INFO: Search for email
+C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72
+                void this.terminate(new Errors_js_1.TimeoutError(`Waiting failed: ${options.timeout}ms exceeded`));
+                                    ^
+
+TimeoutError: Waiting for selector `input[id=email_table_search_input]` failed: Waiting failed: 30000ms exceeded
+    at Timeout.<anonymous> (C:\Users\TR2_DFG\Desktop\tradingview-crawler\node_modules\puppeteer-core\lib\cjs\puppeteer\common\WaitTask.js:72:37)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+Press any key to continue . . .
+
+
+
+
+
+
 
 
 > tradingview-crawler@1.0.0 tv:create_account

@@ -213,3 +213,7 @@ sdf1377@sarmayedigital.com, sdf1377_sarmayedigital, a3b8cd90-07123!8cd90-, a3b8c
 sdf1378@sarmayedigital.com, sdf1378_sarmayedigital, 0f0f2ee6-c0123!f2ee6-, 0f0f2ee6-c0123!, Frayda, Murdocca
 sdf1381@sarmayedigital.com, sdf1381_sarmayedigital, 0d0bc85e-58123!bc85e-, 0d0bc85e-58123!, Casie, Harlene
 sdf1387@sarmayedigital.com, sdf1387_sarmayedigital, 43904e36-92123!04e36-, 43904e36-92123!, Lisa, Estevan
+sdf1389@sarmayedigital.com, sdf1389_sarmayedigital, 2ddc852d-84123!c852d-, 2ddc852d-84123!, Cosette, Stacia
+sdf1391@sarmayedigital.com, sdf1391_sarmayedigital, 8c8ef89c-d8123!ef89c-, 8c8ef89c-d8123!, Anjela, Valenta
+sdf1392@sarmayedigital.com, sdf1392_sarmayedigital, 942176db-a8123!176db-, 942176db-a8123!, Merrile, Heuser
+sdf1393@sarmayedigital.com, sdf1393_sarmayedigital, 277aff40-06123!aff40-, 277aff40-06123!, Enriqueta, Nadaba
