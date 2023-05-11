@@ -6,7 +6,7 @@
   "scripts": {
     "tv:create_email": "node src/create_email.js",
     "tv:create_account": "node src/tv_create_account.js",
-    "tv:set_prop": "node",
+    "tv:set_prop": "node src/tv_set-prop_value.js",
     "tv:csv_export": "node src/tv_csv_exporter.js"
   },
   "repository": {
