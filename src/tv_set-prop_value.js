@@ -16,7 +16,7 @@ const [email, password, value] = get_initial_args();
     logger = change_logger_label(logger, "TV_INITIAL_CRAWLER")
     try{
         logger.info("Opening browser")
-        var [page, browser] = await initial_crawler_config(headless=false, width=1000,height=850)
+        var [page, browser] = await initial_crawler_config(headless='new', width=1000,height=850)
     }
     catch(err){
         logger.error(err.message)
