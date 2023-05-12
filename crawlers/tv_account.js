@@ -1,5 +1,6 @@
 const { initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 module.exports = {
     async tv_create_account(page, email, username, password, firstName, lastName, state=1, temp_mail=false){
@@ -101,8 +102,10 @@ module.exports = {
         await page.waitForSelector('input[name=username]')
         await page.focus('input[name=username]')
         await page.keyboard.type(email)
+        await sleep(1000)
         await page.focus('input[name=password]')
         await page.keyboard.type(password)
+        await sleep(1000)
     
         logger.info("Click on remember me checkbox: disable it")
         await page.click("input[name=remember]")
