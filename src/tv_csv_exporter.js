@@ -1,6 +1,6 @@
 const { tv_login } = require("../crawlers/tv_account.js")
 const { paper_trading_opener, csv_exporter } = require("../crawlers/tv_operations.js")
-
+const { export_API } = require("../helpers/db.js")
 const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
 const [email, password] = get_initial_args();
@@ -10,7 +10,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     logger = change_logger_label(logger, "INITIAL")
     try{
         logger.info("Opening browser")
-        var [page, browser] = await initial_crawler_config(headless='new', width=980,height=766)
+        var [page, browser] = await initial_crawler_config(headless='new', width=1000,height=850)
     }
     catch(err){
         logger.error(err.message)
@@ -40,8 +40,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
     let paper_trading_page = await paper_trading_opener(signed_in_page);
 
-    await csv_exporter(paper_trading_page, email)
+    const string_paths = await csv_exporter(paper_trading_page, email)
     // await sleep(100000)
+
+    console.log(string_paths)
+    res = await export_API(email, string_paths)
+    logger.info(`Response of sending to export_API: ${res}`)
+
     console.log("Done!")
     await browser.close()
 })();

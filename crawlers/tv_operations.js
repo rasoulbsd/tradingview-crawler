@@ -1,5 +1,6 @@
 const { initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
+const fs = require('fs');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -11,7 +12,7 @@ module.exports = {
         let attempts = 0;
         do{
             logger.warn("Open top left menu: Retrying...");
-            if(attempts >= 2){
+            if(attempts >= 4){
                 if((await page.$('input[name="password"]')) != null){
                     logger.error("Probably the username or password is incorrect!");
                     process.exit()
@@ -30,6 +31,7 @@ module.exports = {
         }while(opened_menu == null)
     
         logger.info("Click on the first item in the menu: Products")
+        await page.waitForSelector("div[aria-label=Menu] button")
         const products_btn = await page.$("div[aria-label=Menu] button")
         await products_btn.evaluate((el) => el.click());
     
@@ -196,10 +198,22 @@ module.exports = {
     },
 
     async csv_exporter(page, email){
+        const temp_downloadPath = `./downloads/${email.split('@')[0]}`
+
         const client = await page.target().createCDPSession()
+
+        if (!fs.existsSync(temp_downloadPath)) {
+            fs.mkdirSync(temp_downloadPath);
+        }
+        const directory_name = `${(new Date()).toDateString().replaceAll(" ", "-")}`
+        const downloadPath = temp_downloadPath + `/${directory_name}`
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath);
+        }
+
         await client.send('Page.setDownloadBehavior', {
                             behavior: 'allow',
-                            downloadPath: `./downloads/${email.split('@')[0]}-${new Date()}`,
+                            downloadPath,
                         })
         // await page._client.send('Page.setDownloadBehavior', {
         //     behavior: 'allow',
@@ -211,26 +225,56 @@ module.exports = {
         let export_btn = await page.$$('div[data-name="menu-inner"]>div')
         await export_btn[4].click()
 
-        logger.info("Selecting History")
+        logger.info("Clicking on the dropdown menu of export items")
         await page.waitForSelector('span[data-role="listbox"]')
-        await page.click('span[data-role="listbox"]')
-        await page.waitForSelector('div#id_item_History')
-        await page.click('div#id_item_History')
+        var menu_form = await page.$('span[data-role="listbox"]')
+        await menu_form.click()
 
-        logger.info("Clicking on export submit button")
-        await page.click('button[name="submit"]')
-        // await https.get(imgUrl, res => {
-        //     const stream = fs.createWriteStream('somepic.png');
-        //     res.pipe(stream);
-        //     stream.on('finish', () => {
-        //         stream.close();
-        //     })
-        // })
-        // await page.on('request', req => {
-        //     if (req.url() === urlFile) {
-        //         const file = fs.createWriteStream('./file.pdf');
-        //         https.get(req.url(), response => response.pipe(file));
-        //     }
-        // });
+        await page.waitForSelector('div[data-name="menu-inner"] > div > span')
+        var export_menu_items = await page.$$('div[data-name="menu-inner"] > div > span')
+        logger.info(`Findout number of items for export: ${export_menu_items.length}`)
+
+        const now = new Date()
+        const hours = now.getUTCHours().toString().padStart(2, '0');
+        const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+        const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+
+        var final_string_paths = '';
+        for(var number=0; number<export_menu_items.length; number++){
+            attempts = 0;
+            export_menu_items = [];
+            menu_form = '';
+            while(attempts <= 10 && export_menu_items.length == 0){
+                logger.warn("Export menu options are not visible: Retrying...")
+                menu_form = await page.$('span[data-role="listbox"]')
+                await menu_form.click()
+                await sleep(2000)
+                export_menu_items = await page.$$('div[data-name="menu-inner"] > div > span')
+                attempts += 1;
+            }
+
+            logger.info(`Selecting on the menu: ${number} item`)
+            await export_menu_items[number].click()
+
+            var export_file_name = await menu_form.evaluate((el) => el.innerText.trim())
+            logger.info(`Find filename: ${export_file_name}`)
+
+            logger.info("Clicking on export submit button")
+            await page.click('button[name="submit"]')
+
+            logger.warn(`Waiting for the file number ${number} to downalod`)
+            await sleep(10000)
+
+            const files = await fs.promises.readdir(downloadPath);
+            const downloadedFilename = files.find(file => file.endsWith('Z.csv'));
+
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            const newFilename = `${export_file_name}-${timeString}`.replaceAll(" ", '-');
+
+            final_string_paths += __dirname + `/${email.split('@')[0]}/../downloads/` + directory_name + '/' + newFilename + ".csv" + ' | '
+            logger.info(`Renaming exported item named: "${downloadedFilename}"`)
+            var res = await fs.promises.rename(`${downloadPath}/${downloadedFilename}`, `${downloadPath}/${newFilename}.csv`);
+        }
+        return final_string_paths.slice(0, final_string_paths.length-2).trim()
     }
 }
