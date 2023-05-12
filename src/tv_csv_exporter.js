@@ -14,6 +14,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     }
     catch(err){
         logger.error(err.message)
+        console.log(err)
         process.exit(3)
     }
 
