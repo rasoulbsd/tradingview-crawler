@@ -10,10 +10,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     logger = change_logger_label(logger, "INITIAL")
     try{
         logger.info("Opening browser")
-        var [page, browser] = await initial_crawler_config(headless='new', width=1000,height=850)
+        var [page, browser] = await initial_crawler_config(headless=true, width=1000,height=850)
     }
     catch(err){
-        logger.error(err.message)
+        logger.error(err)
         console.log(err)
         process.exit(3)
     }
