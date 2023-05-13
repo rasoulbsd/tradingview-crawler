@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+
+# -*- coding: utf-8 -*-
+import re
+import sys
+
+try:
+    from pip import main
+except ImportError:
+    # user has most probably upgraded pip in their home
+    # so let them run it anyway until ~/.local/bin makes it in front of the PATH
+    from pip._internal import main
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
