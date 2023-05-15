@@ -37,6 +37,13 @@ app.post('/export_csv', async (req, res) => {
   res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
+app.post('/download_csv', function(req, res){
+  // Get the file path from the request parameters
+  var filePath = req.body.filePath;
+  
+  // Send the file to the client for download
+  res.download(filePath);
+});
 
 // Start server on port 3000
 // app.listen()
