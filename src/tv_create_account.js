@@ -4,9 +4,8 @@ const { register_API } = require("../helpers/db.js")
 
 const { initial_crawler_config, initial_logger, change_logger_label, get_initial_args } = require("../helpers/initial.js");
 var logger = initial_logger();
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-const test = true;
+const test = false;
 
 
 (async () => {
@@ -16,8 +15,7 @@ const test = true;
     const [email, username, password, acc_pass, firstname, lastname] = await create_email(test);
 
     logger = change_logger_label(logger, "TV_INITIAL_CRAWLER")
-    // var page;
-    // var browser;
+
     try{
         logger.info("Opening browser")
         var [page, browser] = await initial_crawler_config()
