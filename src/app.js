@@ -87,7 +87,7 @@ app.post('/export_csv', async (req, res) => {
 });
 
 // Define route for downloading files
-app.post('/download_csv', async (req, res) => {
+app.get('/download_csv', async (req, res) => {
   try {
     // Get the file path from the request body
     const { filePath } = req.body;
