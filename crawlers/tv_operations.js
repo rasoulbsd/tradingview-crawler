@@ -271,7 +271,7 @@ module.exports = {
             const timeString = `${hours}:${minutes}:${seconds}`;
             const newFilename = `${export_file_name}-${timeString}`.replaceAll(" ", '-');
 
-            final_string_paths += __dirname + `/${email.split('@')[0]}/../downloads/` + directory_name + '/' + newFilename + ".csv" + ' | '
+            final_string_paths += __dirname + `/../downloads/${email.split('@')[0]}/` + directory_name + '/' + newFilename + ".csv" + ' | '
             logger.info(`Renaming exported item named: "${downloadedFilename}"`)
             var res = await fs.promises.rename(`${downloadPath}/${downloadedFilename}`, `${downloadPath}/${newFilename}.csv`);
         }
