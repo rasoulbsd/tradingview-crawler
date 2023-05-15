@@ -262,7 +262,7 @@ module.exports = {
             logger.info("Clicking on export submit button")
             await page.click('button[name="submit"]')
 
-            logger.warn(`Waiting for the file number ${number} to downalod`)
+            logger.warn(`Waiting for the file number ${number} to be downaloded`)
             await sleep(10000)
 
             const files = await fs.promises.readdir(downloadPath);
