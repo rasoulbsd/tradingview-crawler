@@ -107,6 +107,7 @@ app.get('/download_csv', async (req, res) => {
 
     // Check if the file exists
     if (!fs.existsSync(filePath)) {
+      console.log(filePath)
       return res.status(404).json({ message: 'File not found' });
     }
 
