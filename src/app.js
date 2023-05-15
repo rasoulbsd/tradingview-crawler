@@ -163,7 +163,11 @@ app.get('/download_csv', async (req, res) => {
     //   fs.unlinkSync(filePath);
     // }
     );
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error sending file' });
   }
+});
 
 // Start server on port 3000
 // app.listen()
