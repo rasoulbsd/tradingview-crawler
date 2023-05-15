@@ -135,17 +135,17 @@ app.get('/download_csv', async (req, res) => {
   try {
     const { filePath } = req.query;
 
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Missing or invalid token' });
-    }
+    // const authHeader = req.headers.authorization;
+    // if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    //   return res.status(401).json({ message: 'Missing or invalid token' });
+    // }
 
-    const token = authHeader.split(' ')[1];
-    try {
-      jwt.verify(token, secretKey);
-    } catch (error) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
+    // const token = authHeader.split(' ')[1];
+    // try {
+    //   jwt.verify(token, secretKey);
+    // } catch (error) {
+    //   return res.status(401).json({ message: 'Invalid token' });
+    // }
 
     if (!fs.existsSync(filePath)) {
       console.log(filePath)
