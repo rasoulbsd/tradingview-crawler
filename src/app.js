@@ -159,9 +159,9 @@ app.get('/download_csv', async (req, res) => {
     res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
 
     fileStream.on('close'
-    // , () => {
+    , () => {
     //   fs.unlinkSync(filePath);
-    // }
+    }
     );
   } catch (error) {
     console.error(error);
