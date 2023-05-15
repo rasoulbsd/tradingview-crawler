@@ -2,6 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 const { initial_logger, change_logger_label } = require("../helpers/initial.js");
 const { create_email, write_to_file, cpanel_verfiy_email } = require("../helpers/cpanel.js");
+const { set_prop_trans } = require("./tv_set-prop_value.js");
+const { export_csv } = require("./tv_csv_exporter.js");
 
 // var logger = initial_logger();
 // logger = change_logger_label(logger, "TV_CREATE_ACC_API");
@@ -19,11 +21,22 @@ app.use(express.urlencoded({ extended: false }));
 
 // Endpoint for verifying email
 app.post('/cpanel_verfiy_email', async (req, res) => {
-  const { email } = req.body;
-  const verification_url = await cpanel_verfiy_email(email);
-  // logger.info(`End of email verification`);
-  res.send({'data': verification_url, 'error': ''}); // Return verification url from cpanel_verfiy_email function
+  const res = await cpanel_verfiy_email(req.body.email);
+  res.send({'data': res.data, 'message': res.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
+
+// Endpoint for verifying email
+app.post('/set_prop_trans', async (req, res) => {
+  const res = await set_prop_trans(req.body.email, req.body.password, req.body.value);
+  res.send({'data': res.data, 'message': res.message ,'error': ''}); // Return verification url from cpanel_verfiy_email function
+});
+
+// Endpoint for verifying email
+app.post('/export_csv', async (req, res) => {
+  const res = await export_csv(req.body.email, req.body.password);
+  res.send({'data': res.data, 'message': res.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
+});
+
 
 // Start server on port 3000
 // app.listen()
