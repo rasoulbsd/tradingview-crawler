@@ -90,7 +90,7 @@ app.post('/export_csv', async (req, res) => {
 app.get('/download_csv', async (req, res) => {
   try {
     // Get the file path from the request body
-    const { filePath } = req.body;
+    const { filePath } = req.query;
 
     // Verify the JWT token in the Authorization header
     const authHeader = req.headers.authorization;
