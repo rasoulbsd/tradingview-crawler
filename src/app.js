@@ -119,9 +119,11 @@ app.post('/download_csv', async (req, res) => {
     res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
 
     // Delete the file after it has been sent to the client
-    fileStream.on('close', () => {
-      fs.unlinkSync(filePath);
-    });
+    fileStream.on('close'
+    // , () => {
+    //   fs.unlinkSync(filePath);
+    // }
+    );
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error sending file' });
