@@ -79,7 +79,7 @@ module.exports = {
 
         const verification_url = await check_email(browser)
 
-        return verification_url
+        return {'message': 'Account verified successfully!', 'data': {'verification_url': verification_url}}
     }
 }
 
