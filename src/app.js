@@ -87,10 +87,10 @@ app.post('/export_csv', async (req, res) => {
 });
 
 // Define route for downloading files
-app.get('/download_csv', async (req, res) => {
+app.post('/download_csv', async (req, res) => {
   try {
     // Get the file path from the request body
-    const { filePath } = req.query;
+    const { filePath } = req.body;
 
     // Verify the JWT token in the Authorization header
     const authHeader = req.headers.authorization;
@@ -130,6 +130,40 @@ app.get('/download_csv', async (req, res) => {
     res.status(500).json({ message: 'Error sending file' });
   }
 });
+
+app.get('/download_csv', async (req, res) => {
+  try {
+    const { filePath } = req.query;
+
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: 'Missing or invalid token' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    try {
+      jwt.verify(token, secretKey);
+    } catch (error) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+
+    if (!fs.existsSync(filePath)) {
+      console.log(filePath)
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+
+    const filename = path.basename(filePath);
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+
+    fileStream.on('close'
+    // , () => {
+    //   fs.unlinkSync(filePath);
+    // }
+    );
+  }
 
 // Start server on port 3000
 // app.listen()
