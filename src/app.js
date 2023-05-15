@@ -21,20 +21,20 @@ app.use(express.urlencoded({ extended: false }));
 
 // Endpoint for verifying email
 app.post('/cpanel_verfiy_email', async (req, res) => {
-  const res = await cpanel_verfiy_email(req.body.email);
-  res.send({'data': res.data, 'message': res.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
+  const api_response = await cpanel_verfiy_email(req.body.email);
+  res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Endpoint for verifying email
 app.post('/set_prop_trans', async (req, res) => {
-  const res = await set_prop_trans(req.body.email, req.body.password, req.body.value);
-  res.send({'data': res.data, 'message': res.message ,'error': ''}); // Return verification url from cpanel_verfiy_email function
+  const api_response = await set_prop_trans(req.body.email, req.body.password, req.body.value);
+  res.send({'data': api_response.data, 'message': api_response.message ,'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Endpoint for verifying email
 app.post('/export_csv', async (req, res) => {
-  const res = await export_csv(req.body.email, req.body.password);
-  res.send({'data': res.data, 'message': res.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
+  const api_response = await export_csv(req.body.email, req.body.password);
+  res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 
