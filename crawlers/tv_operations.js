@@ -169,7 +169,7 @@ module.exports = {
         try{
             articles = await page.waitForSelector('article>button', {setTimeout:5000})
             if(articles != 0){
-                logger.error('Transaction is probably one created!')
+                logger.error('Transaction is probably onece been created!')
                 return 'Created'
                 // await sleep(2000000)
                 // process.exit()

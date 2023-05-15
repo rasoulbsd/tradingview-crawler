@@ -52,19 +52,37 @@ app.post('/login', async (req, res) => {
 
 // Endpoint for verifying email
 app.post('/cpanel_verfiy_email', async (req, res) => {
-  const api_response = await cpanel_verfiy_email(req.body.email);
+  try{
+    var api_response = await cpanel_verfiy_email(req.body.email);
+  }
+  catch(err){
+    console.log(err)
+    res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message}); // Return verification url from cpanel_verfiy_email function
+  }
   res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Endpoint for verifying email
 app.post('/set_prop_trans', async (req, res) => {
-  const api_response = await set_prop_trans(req.body.email, req.body.password, req.body.value);
+  try{
+    var api_response = await set_prop_trans(req.body.email, req.body.password, req.body.value);
+  }
+  catch(err){
+    console.log(err)
+    res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message}); // Return verification url from cpanel_verfiy_email function
+  }
   res.send({'data': api_response.data, 'message': api_response.message ,'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Endpoint for verifying email
 app.post('/export_csv', async (req, res) => {
-  const api_response = await export_csv(req.body.email, req.body.password);
+  try{
+    var api_response = await export_csv(req.body.email, req.body.password);
+  }
+  catch(err){
+    console.log(err)
+    res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message}); // Return verification url from cpanel_verfiy_email function
+  }
   res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
