@@ -46,7 +46,7 @@ module.exports = {
             // ToDo: handle error for incorrect credentials
             logger.warn("Waiting for user to solve captcha!")
             // console.log("Waiting for user to resolve captcha.")
-            await page.waitForSelector(".tv-signin-dialog__resend", {timeout: 60000})
+            await page.waitForSelector(".tv-signin-dialog__resend", {timeout: 60000*10})
             if(temp_mail == true){
                 logger.warn("Waiting for manual email activation!")
                 // console.log("Waiting for user to Activate the email")
