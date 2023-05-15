@@ -6,6 +6,7 @@ const { set_prop_trans } = require("./tv_set-prop_value.js");
 const { export_csv } = require("./tv_csv_exporter.js");
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 
 // Define a secret key for JWT signing
@@ -68,7 +69,7 @@ app.post('/export_csv', async (req, res) => {
 });
 
 // Define route for downloading files
-app.post('/download', async (req, res) => {
+app.post('/download_csv', async (req, res) => {
   try {
     // Get the file path from the request body
     const { filePath } = req.body;
