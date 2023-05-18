@@ -15,7 +15,7 @@ module.exports = {
             if(attempts >= 4){
                 if((await page.$('input[name="password"]')) != null){
                     logger.error("Probably the username or password is incorrect!");
-                    process.exit()
+                    throw new Error("error in paper_trading_label")
                 }
             }
             await page.waitForSelector('button[aria-label="Open menu"]');
@@ -25,7 +25,7 @@ module.exports = {
             attempts += 1;
             if(attempts >= 15){
                 logger.error("Timeout in openning menu")
-                process.exit()
+                throw new Error("error in paper_trading_opener: Timeout in openning menu")
             }
             await sleep(3000)
         }while(opened_menu == null)
@@ -271,7 +271,7 @@ module.exports = {
             const timeString = `${hours}:${minutes}:${seconds}`;
             const newFilename = `${export_file_name}-${timeString}`.replaceAll(" ", '-');
 
-            final_string_paths += __dirname + `/../downloads/${email.split('@')[0]}/` + directory_name + '/' + newFilename + ".csv" + ' | '
+            final_string_paths += `/${email.split('@')[0]}/` + directory_name + '/' + newFilename + ".csv" + ' | '
             logger.info(`Renaming exported item named: "${downloadedFilename}"`)
             var res = await fs.promises.rename(`${downloadPath}/${downloadedFilename}`, `${downloadPath}/${newFilename}.csv`);
         }

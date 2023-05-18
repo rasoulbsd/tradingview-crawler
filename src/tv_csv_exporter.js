@@ -14,7 +14,7 @@ module.exports = {
         catch(err){
             logger.error(err)
             console.log(err)
-            process.exit(3)
+            throw new Error("error in openning browser: in export csv")
         }
     
         logger = change_logger_label(logger, "URL")
@@ -25,7 +25,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
-            process.exit()
+            throw new Error("error in export_csv")
         }
     
         let signed_in_page;
@@ -35,7 +35,8 @@ module.exports = {
         }
         catch(err){
             logger.error(`Error in logging in: ${err.message}`)
-            process.exit()
+            throw new Error("Error in logging in in cpanel")
+            // process.exit()
         }
     
         let paper_trading_page = await paper_trading_opener(signed_in_page);
@@ -46,7 +47,7 @@ module.exports = {
         console.log(string_paths)
         res = await export_API(email, string_paths)
         logger.info(`Response of sending to export_API: ${res}`)
-    
+
         console.log("Done!")
         await browser.close()
         return {'message': 'CSVs exported successfully!', 'data': {'url_path': string_paths.split(" | ")}}
