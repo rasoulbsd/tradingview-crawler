@@ -44,7 +44,7 @@ module.exports = {
             })
             .catch(error => {
                 logger.error(`Error in creating email: ${error.message}`);
-                process.exit()
+                throw new Error("error in creating email")
             });
 
         // ToDo: Send to db
@@ -72,6 +72,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
+            throw new Error("error in verfing email: openning browser \n")
             process.exit(3)
         }
 
@@ -179,6 +180,7 @@ async function check_email(browser){
     }
     if(attempts > 15){
         logger.error("Error in navigating to roundcube!: open mail button not found: waited for 15sec")
+        throw new Error("error in checking email in verifing email in cpanel")
         process.exit()
     }
     logger.info("In roundcube")
@@ -198,6 +200,7 @@ async function check_email(browser){
 
     if(verification_email == null){
         logger.error("Email verification was not delivered! Waited for 60 sec");
+        throw new Error("error in verifing email: email verification was not delivered! Waited for 60 sec")
         process.exit();
     }
     else{

@@ -17,7 +17,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
-            process.exit(3)
+            throw new Error("error in openning browser: set_prop")
         }
         logger = change_logger_label(logger, "TV_SET_PROP");
     
