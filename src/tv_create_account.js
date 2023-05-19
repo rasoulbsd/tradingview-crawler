@@ -6,7 +6,7 @@ const { api_cpanel_verify_email } = require("../helpers/api.js")
 const { initial_crawler_config, initial_logger, change_logger_label, get_initial_args } = require("../helpers/initial.js");
 var logger = initial_logger();
 
-const test = true;
+const test = false;
 
 
 (async () => {
