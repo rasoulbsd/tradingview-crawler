@@ -28,8 +28,8 @@ module.exports = {
             await sign_up_btn.click()
         
             logger.info("Click on email button")
-            await page.waitForSelector('.js-show-email')
-            email_btn = await page.$(".js-show-email");
+            await page.waitForSelector('button[name="Email"]')
+            email_btn = await page.$('button[name="Email"]');
             await email_btn.click()
         
             logger.info("Inserting credentials")
@@ -100,24 +100,24 @@ module.exports = {
         await sign_in_btn.evaluate((el) => el.click());
     
         logger.info("Click on email button")
-        await page.waitForSelector('.js-show-email')
-        email_btn = await page.$(".js-show-email");
+        await page.waitForSelector('button[name="Email"]', {timeout: 60000*2})
+        email_btn = await page.$('button[name="Email"]');
         await email_btn.click()
     
         logger.info("Typing email and password")
-        await page.waitForSelector('input[name=username]')
-        await page.focus('input[name=username]')
+        await page.waitForSelector('input[name=id_username]')
+        await page.focus('input[name=id_username]')
         await page.keyboard.type(email)
         await sleep(1000)
-        await page.focus('input[name=password]')
+        await page.focus('input[name=id_password]')
         await page.keyboard.type(password)
         await sleep(1000)
     
         logger.info("Click on remember me checkbox: disable it")
-        await page.click("input[name=remember]")
+        await page.click("input[type=checkbox]")
     
         logger.info("Submiting login form")
-        await page.click(".tv-button__loader")
+        await page.click("form button")
     
         return page
     }

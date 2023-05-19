@@ -14,7 +14,7 @@ module.exports = {
         catch(err){
             logger.error(err)
             console.log(err)
-            throw new Error("error in openning browser: in export csv")
+            throw new Error("error in openning browser: in export csv: " + err.message)
         }
     
         logger = change_logger_label(logger, "URL")
@@ -25,7 +25,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
-            throw new Error("error in export_csv")
+            throw new Error("error in export_csv: "+err.message)
         }
     
         let signed_in_page;
@@ -35,7 +35,7 @@ module.exports = {
         }
         catch(err){
             logger.error(`Error in logging in: ${err.message}`)
-            throw new Error("Error in logging in in cpanel")
+            throw new Error("Error in logging in in cpanel: "+err.message)
             // process.exit()
         }
     

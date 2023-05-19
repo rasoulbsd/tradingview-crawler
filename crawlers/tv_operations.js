@@ -85,7 +85,7 @@ module.exports = {
 
         if(connect_btn == null){
             logger.error("Error in clicking on second connect button in papertrading popup")
-            process.exit();
+            throw new Error("error in openning paper-trading: Error in clicking on second connect button in papertrading popup")
         }
         else{
             await page.click("button[name=broker-login-submit-button]")
@@ -198,7 +198,7 @@ module.exports = {
     },
 
     async csv_exporter(page, email){
-        const temp_downloadPath = `./downloads/${email.split('@')[0]}`
+        const temp_downloadPath = `../downloads/${email.split('@')[0]}`
 
         const client = await page.target().createCDPSession()
 

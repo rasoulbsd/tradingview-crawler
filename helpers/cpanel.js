@@ -214,6 +214,7 @@ async function check_email(browser){
         var verification_url = await page.evaluate(() => {
             const element = document.querySelectorAll('td[align="center"] > a')[1];
             if (!element) return null;
+            console.log(element.href)
             return element.href
         });
         // await verify_btn.click();
