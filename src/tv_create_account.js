@@ -1,6 +1,7 @@
-const { create_email, write_to_file, cpanel_verfiy_email } = require("../helpers/cpanel.js");
+const { create_email, write_to_file } = require("../helpers/cpanel.js");
 const { tv_create_account } = require("../crawlers/tv_account.js");
 const { register_API } = require("../helpers/db.js")
+const { api_cpanel_verify_email } = require("../helpers/api.js")
 
 const { initial_crawler_config, initial_logger, change_logger_label, get_initial_args } = require("../helpers/initial.js");
 var logger = initial_logger();
@@ -9,6 +10,10 @@ const test = false;
 
 
 (async () => {
+
+    res = await api_cpanel_verify_email("garnette_jem_4e72d@sarmayedigital.com")
+    console.log(res)
+    console.log(res.data.verification_url)
     logger = change_logger_label(logger, "TV_CREATE_ACC");
     logger.info("Starting")
 
@@ -34,7 +39,8 @@ const test = false;
     logger.info(`Response of creating account first stage: ${res}`)
 
     // verify
-    const verification_url = await cpanel_verfiy_email(email)
+    const verification_url = await api_cpanel_verify_email(email)
+    // const verification_url = await cpanel_verfiy_email(email)
     logger.info(`End of email verification`)
 
     await page.goto(verification_url, 
