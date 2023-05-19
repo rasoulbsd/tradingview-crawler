@@ -33,6 +33,7 @@
     "random-name": "^0.1.2",
     "user-agents": "^1.0.1371",
     "uuid": "^9.0.0",
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "yamljs": "^0.3.0"
   }
 }

@@ -198,7 +198,7 @@ module.exports = {
     },
 
     async csv_exporter(page, email){
-        const temp_downloadPath = `../downloads/${email.split('@')[0]}`
+        const temp_downloadPath = `./downloads/${email.split('@')[0]}`
 
         const client = await page.target().createCDPSession()
 
