@@ -1,19 +1,15 @@
 const { create_email, write_to_file } = require("../helpers/cpanel.js");
-const { tv_create_account } = require("../crawlers/tv_account.js");
+const { tv_create_account, verify_email } = require("../crawlers/tv_account.js");
 const { register_API } = require("../helpers/db.js")
 const { api_cpanel_verify_email } = require("../helpers/api.js")
 
 const { initial_crawler_config, initial_logger, change_logger_label, get_initial_args } = require("../helpers/initial.js");
 var logger = initial_logger();
 
-const test = false;
+const test = true;
 
 
 (async () => {
-
-    res = await api_cpanel_verify_email("garnette_jem_4e72d@sarmayedigital.com")
-    console.log(res)
-    console.log(res.data.verification_url)
     logger = change_logger_label(logger, "TV_CREATE_ACC");
     logger.info("Starting")
 
@@ -35,19 +31,26 @@ const test = false;
     console.log(password)
     console.log(firstname)
     console.log(lastname)
-    res = await tv_create_account(page, email, username, acc_pass, firstname, lastname, state=1, temp_mail=false);
+    res = await tv_create_account(page, email, username, acc_pass, firstname, lastname, temp_mail=false);
     logger.info(`Response of creating account first stage: ${res}`)
 
+    logger.info(`Closing browser`)
+    await browser.close()
+
     // verify
-    const verification_url = await api_cpanel_verify_email(email)
+    try{
+        logger.info(`Sending to cpanel verification API`)
+        var verification_url = await api_cpanel_verify_email(email)
+    }
+    catch(err){
+        logger.warn(`Error in cpanel verifing email api: Retrying...`)
+        var verification_url = await api_cpanel_verify_email(email)
+    }
     // const verification_url = await cpanel_verfiy_email(email)
     logger.info(`End of email verification`)
 
-    await page.goto(verification_url, 
-        { waitUntil: 'domcontentloaded' }
-        )
-
-    res = await tv_create_account(page, email, username, acc_pass, firstname, lastname, state=2, temp_mail=false);
+    // res = await tv_create_account(page, email, username, acc_pass, firstname, lastname, state=2, temp_mail=false);
+    res = await verify_email(verification_url);
     logger.info(`Response of creating account final stage: ${res}`)
 
     if(test == false){

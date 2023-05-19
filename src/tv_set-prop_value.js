@@ -36,7 +36,9 @@ module.exports = {
         logger.info(`Response of setting prop: ${res}`)
     
         console.log("Done")
+
         await browser.close()
+
         return {'message': 'Prop set successfully!', 'data': {'value': value}}
         // ToDo: Sending to DB
     }

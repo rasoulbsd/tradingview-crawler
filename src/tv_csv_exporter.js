@@ -49,7 +49,9 @@ module.exports = {
         logger.info(`Response of sending to export_API: ${res}`)
 
         console.log("Done!")
+
         await browser.close()
+
         return {'message': 'CSVs exported successfully!', 'data': {'url_path': string_paths.split(" | ")}}
 
     }

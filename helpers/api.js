@@ -10,13 +10,16 @@ module.exports = {
             email
         };
 
-        await axios.post('91.107.215.42:8000/cpanel_verfiy_email', data)
+        return await axios.post('http://91.107.215.42:8000/cpanel_verfiy_email', data)
             .then((response) => {
                 logger.info("Send to API successfully!")
-                return response
+                return response.data.data.verification_url
             })
             .catch((error) => {
-                logger.info("Error in sending to API: " + error.message)
+                logger.error("Error in sending to API: " + error.message)
+                // return "error"
+                throw new Error(error.message)
+                // process.exit()
             });
     }
 }
