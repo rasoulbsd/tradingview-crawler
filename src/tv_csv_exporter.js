@@ -25,6 +25,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
+            await browser.close()
             throw new Error("error in export_csv: "+err.message)
         }
     
@@ -35,6 +36,7 @@ module.exports = {
         }
         catch(err){
             logger.error(`Error in logging in: ${err.message}`)
+            await browser.close()
             throw new Error("Error in logging in in cpanel: "+err.message)
             // process.exit()
         }
