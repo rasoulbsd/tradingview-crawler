@@ -1,0 +1,21 @@
+Time,Text
+2023-03-30 08:45:09,Order 769859324 rejected; reason: out_of_session
+2023-03-30 08:45:09,Order 769859323 rejected; reason: out_of_session
+2023-03-30 08:45:09,Order 769859322 rejected; reason: out_of_session
+2023-03-30 08:45:09,Call to place market order to buy 1 shares of symbol NASDAQ:AAPL with SL 160.52 and TP 161.52
+2023-03-30 08:44:49,Order 769859181 rejected; reason: out_of_session
+2023-03-30 08:44:49,Order 769859180 rejected; reason: out_of_session
+2023-03-30 08:44:49,Order 769859179 rejected; reason: out_of_session
+2023-03-30 08:44:49,Call to place market order to sell 1 shares of symbol TVC:DJI with SL 32717.86 and TP 32716.86
+2023-03-30 08:44:41,Order 769859119 rejected; reason: out_of_session
+2023-03-30 08:44:41,Order 769859118 rejected; reason: out_of_session
+2023-03-30 08:44:41,Order 769859117 rejected; reason: out_of_session
+2023-03-30 08:44:41,Call to place market order to buy 1 shares of symbol TVC:DJI with SL 32717.36 and TP 32718.36
+2023-03-30 08:44:04,Order 769858790 rejected; reason: out_of_session
+2023-03-30 08:44:03,Order 769858789 rejected; reason: out_of_session
+2023-03-30 08:44:03,Order 769858788 rejected; reason: out_of_session
+2023-03-30 08:44:03,Call to place market order to buy 1 shares of symbol TVC:DJI with SL 32717.36 and TP 32718.36
+2023-03-30 08:43:35,Order 769858576 rejected; reason: out_of_session
+2023-03-30 08:43:35,Order 769858575 rejected; reason: out_of_session
+2023-03-30 08:43:35,Order 769858574 rejected; reason: out_of_session
+2023-03-30 08:43:35,Call to place market order to buy 1000 shares of symbol TVC:DJI with SL 32717.36 and TP 32718.36

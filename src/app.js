@@ -65,13 +65,13 @@ app.post('/cpanel_verfiy_email', async (req, res) => {
     return res.status(401).json({ message: 'Invalid token' });
   }
   try{
-    var api_response = await cpanel_verfiy_email(req.body.email);
+    const api_response = await cpanel_verfiy_email(req.body.email);
+    return res.send({'data': api_response.data, 'message': api_response.message, 'error': ''});
   }
   catch(err){
     console.log(err)
-    res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message}); // Return verification url from cpanel_verfiy_email function
+    return res.status(500).json({'data': {}, 'message': 'Something went wrong', 'error': err.message});
   }
-  res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Endpoint for verifying email
@@ -89,13 +89,14 @@ app.post('/set_prop_trans', async (req, res) => {
     return res.status(401).json({ message: 'Invalid token' });
   }
   try{
-    var api_response = await set_prop_trans(req.body.email, req.body.password, req.body.value);
+    const api_response = await set_prop_trans(req.body.email, req.body.password, req.body.value);
+    return res.send({'data': api_response.data, 'message': api_response.message ,'error': ''});
   }
   catch(err){
     console.log(err)
-    res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message}); // Return verification url from cpanel_verfiy_email function
+    return res.status(500).json({'data': {}, 'message': 'Something went wrong', 'error': err.message});
+    // return res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message});
   }
-  res.send({'data': api_response.data, 'message': api_response.message ,'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Endpoint for verifying email
@@ -113,13 +114,14 @@ app.post('/export_csv', async (req, res) => {
     return res.status(401).json({ message: 'Invalid token' });
   }
   try{
-    var api_response = await export_csv(req.body.email, req.body.password);
+    const api_response = await export_csv(req.body.email, req.body.password);
+    return res.send({'data': api_response.data, 'message': api_response.message, 'error': ''});
   }
   catch(err){
     console.log(err)
-    res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message}); // Return verification url from cpanel_verfiy_email function
+    return res.status(500).json({'data': {}, 'message': 'Something went wrong', 'error': err.message});
+    // return res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message});
   }
-  res.send({'data': api_response.data, 'message': api_response.message, 'error': ''}); // Return verification url from cpanel_verfiy_email function
 });
 
 // Define route for downloading files
@@ -127,7 +129,7 @@ app.post('/download_csv', async (req, res) => {
   try {
     // Get the file path from the request body
     const { filePath } = req.body;
-    const downloadsDir = path.join(__dirname, 'downloads');
+    const downloadsDir = path.join(__dirname, '../downloads');
     const fullFilePath = path.join(downloadsDir, filePath);
 
     // Verify the JWT token in the Authorization header
