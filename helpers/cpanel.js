@@ -80,6 +80,8 @@ module.exports = {
 
         const verification_url = await check_email(browser)
 
+        await browser.close()
+
         return {'message': 'Account verified successfully!', 'data': {'verification_url': verification_url}}
     }
 }
