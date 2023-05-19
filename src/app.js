@@ -54,17 +54,17 @@ app.post('/login', async (req, res) => {
 // Endpoint for verifying email
 app.post('/cpanel_verfiy_email', async (req, res) => {
   // Verify the JWT token in the Authorization header
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Missing or invalid token' });
-  }
+  // const authHeader = req.headers.authorization;
+  // if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  //   return res.status(401).json({ message: 'Missing or invalid token' });
+  // }
 
-  const token = authHeader.split(' ')[1];
-  try {
-    jwt.verify(token, secretKey);
-  } catch (error) {
-    return res.status(401).json({ message: 'Invalid token' });
-  }
+  // const token = authHeader.split(' ')[1];
+  // try {
+  //   jwt.verify(token, secretKey);
+  // } catch (error) {
+  //   return res.status(401).json({ message: 'Invalid token' });
+  // }
   try{
     const api_response = await cpanel_verfiy_email(req.body.email);
     return res.send({'data': api_response.data, 'message': api_response.message, 'error': ''});
