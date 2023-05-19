@@ -7,6 +7,7 @@ const { export_csv } = require("./tv_csv_exporter.js");
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const yaml = require('yamljs');
 
 
 // Define a secret key for JWT signing
@@ -171,5 +172,10 @@ app.post('/download_csv', async (req, res) => {
   }
 });
 
+// Serve the Swagger YAML file
+app.get('/api/docs', (req, res) => {
+  res.setHeader('Content-Type', 'application/x-yaml');
+  res.sendFile(__dirname + '/../swagger.yaml');
+});
 
 app.listen(PORT, () => console.log(`API IS RUNNING ON PORT: ${PORT}`));
