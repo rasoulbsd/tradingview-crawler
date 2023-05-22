@@ -1,0 +1,191 @@
+swagger: '2.0'
+info:
+  title: TradingView Crawler
+  description: Creating accounts in tradingview.com and managing some functionalities
+  version: 1.0.0
+basePath: /api/v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    scheme: bearer
+    in: header
+paths:
+  /login:
+    post:
+      tags:
+        - Authentication
+      summary: Generate JWT token
+      description: Generate a JWT token with a 96-hour expiration time
+      parameters:
+        - in: body
+          name: credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Token generated successfully
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+      security:
+        - Bearer: []
+  /cpanel_verfiy_email:
+    post:
+      tags:
+        - Email Verification
+      summary: Verify email in cPanel
+      description: Verify email address by crawling cPanel and return the response data
+      parameters:
+        - in: body
+          name: email
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+        - $ref: '#/securityDefinitions/Bearer'
+      responses:
+        200:
+          description: Email verified successfully
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+              message:
+                type: string
+              error:
+                type: string
+        401:
+          description: Invalid token or missing token
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+  /set_prop_trans:
+    post:
+      tags:
+        - Set Property and Transaction
+      summary: Set property value and transaction using
+      description: Set property transaction value using the email, password, and value provided in the request body
+      parameters:
+        - in: body
+          name: transaction
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+              value:
+                type: integer
+        - $ref: '#/securityDefinitions/Bearer'
+      responses:
+        200:
+          description: Property transaction value set successfully
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+              message:
+                type: string
+              error:
+                type: string
+        401:
+          description: Invalid token or missing token
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+  /export_csv:
+    post:
+      tags:
+        - Export CSV
+      summary: Export CSV files
+      description: Export CSV file/files using the email and password provided in the request body
+      parameters:
+        - in: body
+          name: credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+        - $ref: '#/securityDefinitions/Bearer'
+      responses:
+        200:
+          description: CSV file exported successfully
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+              message:
+                type: string
+              error:
+                type: string
+        401:
+          description: Invalid token or missing token
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - Bearer: []
+  /download_csv:
+    post:
+      tags:
+        - Download CSV
+      summary: Download CSV file from server
+      description: Download the CSV file using the reletive file path provided in the request body
+      parameters:
+        - in: body
+          name: filePath
+          required: true
+          schema:
+            type: object
+            properties:
+              filePath:
+                type: string
+        - $ref: '#/securityDefinitions/Bearer'
+      responses:
+        200:
+          description: File downloaded successfully
+          schema:
+            type: file
+        401:
+          description: Invalid token or missing token
+          schema:
+            $ref: '#/definitions/Error'

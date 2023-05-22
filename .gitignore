@@ -16,8 +16,8 @@ db.sqlite3
 .DS_Store
 */.Ds_Store
 *.vscode
-lib/
-bin/
+# lib/
+# bin/
 include/
 .Python
 pip-selfcheck.json
