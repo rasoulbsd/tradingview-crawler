@@ -37,8 +37,10 @@ module.exports = {
         // await page.keyboard.type(username)
         await page.focus('input[name=id_email]')
         await page.keyboard.type(email)
+        await sleep(800)
         await page.focus('input[name=id_password]')
         await page.keyboard.type(password)
+        await sleep(800)
         // await page.waitForSelector('input[type=checkbox]')
         // await (await page.$("input[type=checkbox]")).click()
 
@@ -140,6 +142,7 @@ module.exports = {
         // await page.keyboard.type(lastName)
 
         logger.info("Click on policy button")
+        await page.waitForSelector('input[type=checkbox]')
         checkboxes = await page.$$("input[type=checkbox]")
         await checkboxes[1].click()
 
