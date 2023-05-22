@@ -1,4 +1,4 @@
-const { initial_logger, change_logger_label } = require("../helpers/initial.js")
+const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
