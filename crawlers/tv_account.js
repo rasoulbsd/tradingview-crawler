@@ -140,7 +140,8 @@ module.exports = {
         // await page.keyboard.type(lastName)
 
         logger.info("Click on policy button")
-        await page.click("input[checkbox]")
+        checkboxes = await page.$$("input[type=checkbox]")
+        await checkboxes[1].click()
 
         logger.info("Click on submit button")
         await page.click('form button')
