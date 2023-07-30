@@ -8,8 +8,8 @@ After adding the deploy key, you can clone the repo by the ssh method.
 ## Server Setup
 You must have npm and node installed on the machine. It is very much preferred to use nvm and install node version 16.
 
-### installing node, npm using nvm
-Please see here for installing the latest nvm: 
+### installing node and npm using nvm
+Please see the following link for installing the latest nvm (for now we are installing v0.39.4): 
 https://github.com/nvm-sh/nvm
 
 #### installing nvm
