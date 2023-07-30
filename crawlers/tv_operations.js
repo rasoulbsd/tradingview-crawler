@@ -12,9 +12,11 @@ module.exports = {
         let attempts = 0;
         do{
             logger.warn("Open top left menu: Retrying...");
-            if(attempts >= 4){
+            if(attempts >= 5){
                 if((await page.$('input[name="password"]')) != null){
                     logger.error("Probably the username or password is incorrect!");
+                    // screenshot
+                    await page.screenshot({path: './paper_trading_opener.png'});
                     throw new Error("error in paper_trading_label")
                 }
             }
@@ -25,6 +27,8 @@ module.exports = {
             attempts += 1;
             if(attempts >= 15){
                 logger.error("Timeout in openning menu")
+                // screenshot
+                await page.screenshot({path: './paper_trading_opener2.png'});
                 throw new Error("error in paper_trading_opener: Timeout in openning menu")
             }
             await sleep(3000)
