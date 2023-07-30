@@ -113,7 +113,23 @@ module.exports = {
     
         logger.info("Submiting login form")
         await page.click("form button")
-    
+
+        try_count = 0;
+        do{
+            reCaptcha_num = await page.$$('iframe[title="reCAPTCHA"]')
+            if (reCaptcha_num.length == 2){
+                logger.error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+                await sleep(10000)
+                throw new Error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+            }
+            try_count += 1;
+            await sleep(1000)
+        }while(reCaptcha_num.length != 2 && try_count <= 10)
+        if(try_count >= 10){
+            logger.error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+            throw new Error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+        }
+
         return page
     },
 
@@ -124,6 +140,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
+            throw new Error(`error in verfing email: openning browser: \n${err.message}`)
             process.exit(3)
         }
 
