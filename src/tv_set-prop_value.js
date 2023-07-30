@@ -21,8 +21,17 @@ module.exports = {
         }
         logger = change_logger_label(logger, "TV_SET_PROP");
     
-        page = await tv_login(page, email, password);
-    
+        // page = await tv_login(page, email, password);
+        try{
+            page = await tv_login(page, email, password)
+            logger.info("Login Successful!")
+        }
+        catch(err){
+            logger.error(`Error in logging in: ${err.message}`)
+            await browser.close()
+            throw new Error("Error in logging in in cpanel: \n"+err.message)
+            // process.exit()
+        }
         page = await paper_trading_opener(page);
     
         res = await set_prop(page, value)
