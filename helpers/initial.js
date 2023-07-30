@@ -11,7 +11,7 @@ var myFormat;
 
 module.exports = {
     async initial_crawler_config(headless=false, width=1920, height=1080){
-        headless = false
+        // headless = false
         const browser = await puppeteer.launch(
             {
                 headless,
