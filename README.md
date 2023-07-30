@@ -58,6 +58,32 @@ sudo apt-get install libnss3-dev
 ```
 sudo apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget libgbm-dev
 ```
+#### Note!
+If there were problem with downloading chromium (mostly you may encounter error 403 and the reason if the IP of the server is black-listed by google), you should follow these steps:
+
+```
+PUPPETEER_SKIP_DOWNLOAD=true npm install puppeteer
+```
+It might fix the problem and you can enter "npm install" again but if there was a problem, enter this and try again:
+```
+npm cache clean --force
+PUPPETEER_SKIP_DOWNLOAD=true npm install puppeteer
+```
+**Download Chrome Manually**
+* https://download-chromium.appspot.com/
+* https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html
+
+**Example:**
+```
+wget https://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/1177026/chrome-linux.zip
+unzip chrome-linux.zip
+```
+edit this in **"/helpers/initial.js"**:
+```
+const browser = await puppeteer.launch({
+    executablePath: 'path/to/your/chrome.exe'
+});
+```
 
 ## Running the server
 The easy-to-use method for testing the server is to create a screen and run the server in it:
@@ -108,5 +134,5 @@ There are several functions you can use with `npm`:
 * Create email in Cpanel
 * exporting account history
 * Create account in Tradingview
-* log in to an Tradingview account
+* log in to a Tradingview account
 * set prop in paper trading in Tradingview for an existing account
