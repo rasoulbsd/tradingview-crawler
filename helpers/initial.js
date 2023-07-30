@@ -11,7 +11,7 @@ var myFormat;
 
 module.exports = {
     async initial_crawler_config(headless=false, width=1920, height=1080){
-        // headless = false
+        headless = false
         const browser = await puppeteer.launch(
             {
                 headless,
@@ -25,12 +25,18 @@ module.exports = {
             });
         const page = await browser.newPage();
         await page.setUserAgent(userAgent.random().toString());
+        // await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
         // await page.setViewport({
         //     // width: 1200,
         //     // height: 1080,
         //     // deviceScaleFactor: 1,
         //     // isLandScape: true
         // });
+        await page.goto("https://i-know-you-faked-user-agent.glitch.me/new-window", {waitUntil: 'domcontentloaded'});
+        
+        await page.screenshot({ path: './glitch.png' });
+        await browser.close()
+        process.exit()
         return [page, browser];
     },
     initial_logger(save_log = false){
