@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer-extra');
 var userAgent = require('user-agents');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
@@ -11,7 +12,7 @@ var myFormat;
 
 module.exports = {
     async initial_crawler_config(headless=false, width=1920, height=1080){
-        // headless = false
+        headless = false
         const browser = await puppeteer.launch(
             {
                 headless,
@@ -24,16 +25,39 @@ module.exports = {
                 // executablePath: '/Applications/Chromium.app' 
             });
         const page = await browser.newPage();
-        await page.setUserAgent(userAgent.random().toString());
+        // await page.setUserAgent(userAgent.random().toString());
         // await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
+        // await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36")
         // await page.setViewport({
         //     // width: 1200,
         //     // height: 1080,
         //     // deviceScaleFactor: 1,
         //     // isLandScape: true
         // });
-        await page.goto("https://i-know-you-faked-user-agent.glitch.me/new-window", {waitUntil: 'domcontentloaded'});
-        
+        // await page.goto("https://i-know-you-faked-user-agent.glitch.me/new-window", {waitUntil: 'domcontentloaded'});
+        await page.goto("https://www.google.com", {waitUntil: 'domcontentloaded'});
+        await page.waitForSelector('textarea')
+        // await page.mouse.click(0, 100);
+        const element = await page.$('textarea');
+        await element.hover()
+        await page.waitForTimeout(1000);
+        await element.click()
+        // await page.click('#searchform textarea',)
+        // await page.sleep(3000)
+        await page.keyboard.type("what is my user agent")
+        await page.waitForTimeout(5000);
+        await page.keyboard.press('Enter')
+        await page.waitForSelector('block-component div > span')
+        const text = await page.evaluate(() => {
+            const span = document.querySelector('block-component div > span');
+            if (span) {
+              return span.parentElement.textContent;
+            } else {
+              return null;
+            }
+          });
+        console.log(text.replace("Your user agent", "Your user agent:\n"))
+        await sleep(1000)
         await page.screenshot({ path: './glitch.png' });
         await browser.close()
         process.exit()
