@@ -119,7 +119,7 @@ module.exports = {
         //     reCaptcha_num = await page.$$('iframe[title="reCAPTCHA"]')
         //     if (reCaptcha_num.length == 2){
         //         logger.error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
-                await sleep(10000)
+                // await sleep(10000)
         //         throw new Error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
         //     }
         //     try_count += 1;
@@ -129,6 +129,8 @@ module.exports = {
         //     logger.error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
         //     throw new Error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
         // }
+
+        // await page.
 
         return page
     },
