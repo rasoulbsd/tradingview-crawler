@@ -90,16 +90,20 @@ module.exports = {
         await page.click('button[aria-label="Open user menu"]')
     
         logger.info("Click on sign in button")
+        // screenshot
+        await page.screenshot({path: './1-Click_on_sign_in_button.png'});
         await page.waitForSelector("button[data-name=header-user-menu-sign-in]")
         sign_in_btn = await page.$("button[data-name=header-user-menu-sign-in]")
         await sign_in_btn.evaluate((el) => el.click());
     
         logger.info("Click on email button")
+        await page.screenshot({path: './2-Click_on_email_button.png'});
         await page.waitForSelector('button[name="Email"]', {timeout: 60000*2})
         email_btn = await page.$('button[name="Email"]');
         await email_btn.click()
     
         logger.info("Typing email and password")
+        await page.screenshot({path: './3-Typing_email_and_password.png'});
         await page.waitForSelector('input[name=id_username]')
         await page.focus('input[name=id_username]')
         await page.keyboard.type(email)
@@ -109,9 +113,11 @@ module.exports = {
         await sleep(1000)
     
         logger.info("Click on remember me checkbox: disable it")
+        await page.screenshot({path: './4-Click_on_remember_me_checkbox:_disable_it.png'});
         await page.click("input[type=checkbox]")
     
         logger.info("Submiting login form")
+        await page.screenshot({path: './5-Submiting_login_for.png'});
         await page.click("form button")
 
         // try_count = 0;
