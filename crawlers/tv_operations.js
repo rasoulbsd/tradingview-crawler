@@ -14,6 +14,7 @@ module.exports = {
         let attempts = 0;
         do{
             logger.warn("Open top left menu: Retrying...");
+            // await page.screenshot({path: `./screenshots/8-Open_top_left_menu___attempts:${attempts}.png`});
             if(attempts >= 5){
                 if((await page.$('input[name="password"]')) != null){
                     logger.error("Probably the username or password is incorrect!");
