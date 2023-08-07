@@ -113,7 +113,6 @@ module.exports = {
         await sleep(1000)
     
         logger.info("Click on remember me checkbox: disable it")
-        //await page.screenshot({path: './screenshots/4-Click_on_remember_me_checkbox:_disable_it.png'});
         await page.click("input[type=checkbox]")
     
         logger.info("Submiting login form")
