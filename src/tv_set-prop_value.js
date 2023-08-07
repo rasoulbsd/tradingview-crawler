@@ -25,7 +25,7 @@ module.exports = {
         try{
             page = await tv_login(page, email, password)
             logger.info("Login Successful!")
-            await page.screenshot({path: './screenshots/6-Logn_Successful!.png'});
+            //await page.screenshot({path: './screenshots/6-Logn_Successful!.png'});
         }
         catch(err){
             logger.error(`Error in logging in: ${err.message}`)
