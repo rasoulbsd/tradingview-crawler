@@ -50,4 +50,5 @@ src/test.js
 package-lock.json
 
 .env
-.env
+local_file_db.text
+local_file_db.txt
