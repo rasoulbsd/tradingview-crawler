@@ -9,17 +9,14 @@ module.exports = {
         logger = change_logger_label(logger, "PAPER-TRADING");
         logger.info("Open top left menu");
         await sleep(10000)
-        //await page.screenshot({path: './screenshots/7-Open_top_left_menu.png'});
         // await sleep(50000)
         let attempts = 0;
         do{
             logger.warn("Open top left menu: Retrying...");
-            // await page.screenshot({path: `./screenshots/8-Open_top_left_menu___attempts:${attempts}.png`});
             if(attempts >= 5){
                 if((await page.$('input[name="password"]')) != null){
                     logger.error("Probably the username or password is incorrect!");
                     // screenshot
-                    //await page.screenshot({path: './screenshots/paper_trading_opener.png'});
                     throw new Error("error in paper_trading_label")
                 }
             }
@@ -31,7 +28,6 @@ module.exports = {
             if(attempts >= 15){
                 logger.error("Timeout in openning menu")
                 // screenshot
-                //await page.screenshot({path: './screenshots/paper_trading_opener2.png'});
                 throw new Error("error in paper_trading_opener: Timeout in openning menu")
             }
             await sleep(3000)
