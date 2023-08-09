@@ -1,5 +1,12 @@
 # Tradingview Crawler
 
+## Cloning the repo
+
+if your operating system is Windows and you have encountered an error similar to this "Error: Invalid file path", you should enter the below command to avoid this problem (specially when you want to checkout to another branch)
+```
+git config core.protectNTFS false
+```
+
 ## Deploying repo to a VPS
 We must add the server's ssh-key to the deploy keys of the server. Consider that you must fork the repo to be able to add the deploy key. 
 When creating the deploy key for the repo, make sure to check the "write access" checkbox.
@@ -59,7 +66,7 @@ sudo apt-get install libnss3-dev
 sudo apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget libgbm-dev
 ```
 #### Note!
-If there were problem with downloading chromium (mostly you may encounter error 403 and the reason if the IP of the server is black-listed by google), you should follow these steps:
+If there were problems with downloading Chromium (mostly you may encounter error 403 and the reason if the IP of the server is black-listed by Google), you should follow these steps:
 
 ```
 PUPPETEER_SKIP_DOWNLOAD=true npm install puppeteer
