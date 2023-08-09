@@ -81,6 +81,19 @@ app.post('/account_login', async (req, res) => {
 
   try{
     const [browser, message] = await acc_login(email, password);
+    for(let browser_dict of browsers_dict){
+      if(browser_dict['username'] == email){
+        let error_message = "There was already an browser opened for this email"
+        try{
+          await browser_dict['browser'].close()
+        }
+        catch(err){
+          error_message += `\nProblem with closing the prev:\n${err.message}`
+        }
+        browser_dict['browser'] = browser;
+        return res.send({'data': browser, 'message': message ,'error': error_message});
+      }
+    }
     browsers_dict.push({
       "username": email,
       "browser": browser
@@ -133,7 +146,6 @@ app.post('/set_prop_trans', async (req, res) => {
   } catch (error) {
     return res.status(401).json({ message: 'Invalid token' });
   }
-  console.log(`in set prop: ${browsers_dict.length}`)
 
   for(let browser_dict of browsers_dict){
     if(browser_dict.username == req.body.email){
@@ -169,13 +181,20 @@ app.post('/export_csv', async (req, res) => {
   } catch (error) {
     return res.status(401).json({ message: 'Invalid token' });
   }
+
+  for(let browser_dict of browsers_dict){
+    if(browser_dict.username == req.body.email){
+      var browser = browser_dict.browser
+    }
+  }
+
   try{
-    const api_response = await export_csv(req.body.email, req.body.password);
-    return res.send({'data': api_response.data, 'message': api_response.message, 'error': ''});
+    const api_response = await export_csv(req.body.email, req.body.password, browser);
+    return res.send({'data': api_response.data, 'message': api_response.message ,'error': ''});
   }
   catch(err){
     console.log(err)
-    return res.status(500).json({'data': {}, 'message': 'Something went wrong', 'error': err.message});
+    return res.status(500).json({'data': {}, 'error': 'Something went wrong', 'message': err.message});
     // return res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message});
   }
 });

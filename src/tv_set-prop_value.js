@@ -12,7 +12,7 @@ module.exports = {
             page = (await browser.pages())[1]
         }
         catch(error){
-            throw new Error("Error: It seems there is now browser opened for this. Try openning the browser by calling desired API first")
+            throw new Error("Error: It seems there is no browser opened for this. Try openning the browser by calling desired API first")
         }
 
         res = await page_status_checker(page)
