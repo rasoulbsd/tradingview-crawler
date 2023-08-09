@@ -16,7 +16,7 @@ module.exports = {
             await page.click('button[aria-label="Open menu"]')
 
             opened_menu = await page.$("div[aria-label=Menu]")
-            if(attempts >= 25){
+            if(attempts >= 50){
                 logger.error("Timeout in openning menu")
                 // screenshot
                 throw new Error("error in paper_trading_opener: Timeout in openning menu or Probably the username or password is incorrect!")
