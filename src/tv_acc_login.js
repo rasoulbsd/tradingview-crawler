@@ -4,6 +4,7 @@ const { initProp_API } = require("../helpers/db.js")
 const fs = require('fs');
 
 const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js");
+const { recaptcha_checker } = require("../helpers/account.js")
 var logger = initial_logger();
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
         logger = change_logger_label(logger, "TV_INITIAL_CRAWLER")
         try{
             logger.info("Opening browser")
-            var [page, browser] = await initial_crawler_config(headless=false, width=1000,height=850)
+            var [page, browser] = await initial_crawler_config(headless=false, width=1400,height=1080)
         }
         catch(err){
             logger.error(err.message)
@@ -28,20 +29,15 @@ module.exports = {
         catch(err){
             logger.error(`Error in logging in: ${err.message}`)
             await browser.close()
-            throw new Error("Error in logging in in cpanel: \n"+err.message)
+            throw new Error("Error in logging into account: \n"+err.message)
             // process.exit()
         }
 
-        // try {
-        //     data = {
-        //         "username": email,
-        //     }
-        //     fs.appendFileSync("local_file_db.text", `${email} - ${browser}\n`);
-        //   } catch (err) {
-        //     console.error(err);
-        //     process.exit()
-        // }
-        
-        return browser
+        if(await recaptcha_checker(page)){
+            return [browser, "Warning! reCaptcha found!"]
+        }
+        else{
+            return [browser, "Login Successfull!"]
+        }
     }
 }
