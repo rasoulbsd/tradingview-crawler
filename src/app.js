@@ -22,7 +22,16 @@ const jwt_password = "js28Fh43j9j@*J09"
 // const router = require("./routes")
 const app = express();
 
-const PORT = 8000;
+if((process.argv.slice(2)).length>1){
+  console.log("\x1b[31m%s\x1b[0m", "Please enter only a port or leave blank to use port 80") // red
+  process.exit();
+}
+if(process.argv.slice(2)[0]){
+  var PORT = process.argv.slice(2)[0];
+}
+else{
+  var PORT = 8000;
+}
 
 var browsers_dict = [];
 
@@ -70,40 +79,20 @@ app.post('/account_login', async (req, res) => {
   email = req.body.email;
   password = req.body.password;
 
-  // try {
-  //   const data = fs.readFileSync('local_file_db.text', 'utf8');
-  //   console.log(data);
-  // } catch (err) {
-  //   console.error(err);
-  // }
-  // browsers_dict = [];
-  // data.split("\n").forEach((line) => {
-  //   temp = line.split(" - ")
-  //   data = {
-  //     "username": temp[0],
-  //     "browser": temp[1]
-  //   }
-  //   browsers_dict.push(data)
-  // })
-
-  // browser = browsers_dict[username]
-
   try{
-    const browser = await acc_login(email, password);
+    const [browser, message] = await acc_login(email, password);
     browsers_dict.push({
       "username": email,
       "browser": browser
     })
-    console.log(`in login: ${browsers_dict.length}`)
-    return res.send({'data': browser, 'message': "" ,'error': ''});
+    return res.send({'data': browser, 'message': message ,'error': ''});
   }
   catch(err){
     console.log(err)
-    return res.status(500).json({'data': {}, 'message': 'Something went wrong', 'error': err.message});
+    return res.status(500).json({'data': {}, 'error': `Something went wrong`, 'message': err.message});
     // return res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message});
   }
 });
-
 
 
 // Endpoint for verifying email
@@ -161,7 +150,7 @@ app.post('/set_prop_trans', async (req, res) => {
   }
   catch(err){
     console.log(err)
-    return res.status(500).json({'data': {}, 'message': 'Something went wrong', 'error': err.message});
+    return res.status(500).json({'data': {}, 'error': 'Something went wrong', 'message': err.message});
     // return res.send({'data': {}, 'message': 'Something went wrong', 'error': err.message});
   }
 });

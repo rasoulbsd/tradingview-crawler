@@ -37,7 +37,7 @@ module.exports = {
         catch(err){
             logger.error(`Error in logging in: ${err.message}`)
             await browser.close()
-            throw new Error("Error in logging in in cpanel: \n"+err.message)
+            throw new Error("Error in logging into account: \n"+err.message)
             // process.exit()
         }
     

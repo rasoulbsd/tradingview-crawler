@@ -8,29 +8,29 @@ module.exports = {
     async paper_trading_opener(page){
         logger = change_logger_label(logger, "PAPER-TRADING");
         logger.info("Open top left menu");
-        await sleep(10000)
+        await sleep(1000)
         // await sleep(50000)
         let attempts = 0;
         do{
-            logger.warn("Open top left menu: Retrying...");
-            if(attempts >= 5){
-                if((await page.$('input[name="password"]')) != null){
-                    logger.error("Probably the username or password is incorrect!");
-                    // screenshot
-                    throw new Error("error in paper_trading_label")
-                }
-            }
             await page.waitForSelector('button[aria-label="Open menu"]');
             await page.click('button[aria-label="Open menu"]')
 
             opened_menu = await page.$("div[aria-label=Menu]")
-            attempts += 1;
-            if(attempts >= 15){
+            if(attempts >= 25){
                 logger.error("Timeout in openning menu")
                 // screenshot
-                throw new Error("error in paper_trading_opener: Timeout in openning menu")
+                throw new Error("error in paper_trading_opener: Timeout in openning menu or Probably the username or password is incorrect!")
             }
-            await sleep(3000)
+            // else if(attempts >= 50){
+            //     if((await page.$('input[name="password"]')) != null){
+            //         logger.error("Probably the username or password is incorrect!");
+            //         // screenshot
+            //         throw new Error("error in paper_trading_label")
+            //     }
+            // }
+            logger.warn("Open top left menu: Retrying...");
+            attempts += 1;
+            await sleep(100)
         }while(opened_menu == null)
     
         logger.info("Click on the first item in the menu: Products")
@@ -53,30 +53,41 @@ module.exports = {
         // connect_btn = await page.$('div[data-name="order-panel"] button')
         // await connect_btn.evaluate((el) => el.click());
 
-        logger.info("Clicking on first connect button")
-        await page.waitForSelector('button[aria-label="Order Panel"]', { timeout:90000 })
-        var connect_btn = await page.$('div[data-name="order-panel"] button')
-        try_count = 0
-        while(try_count <= 20 && connect_btn == null){
-            try{
-                await page.click('button[aria-label="Order Panel"]')
+        await policy_accepting(page)
+
+        try{
+            logger.info("Clicking on first connect button")
+            await page.waitForSelector('button[aria-label="Order Panel"]', { timeout:15000 })
+            var connect_btn = await page.$('div[data-name="order-panel"] button')
+            try_count = 0
+            while(try_count <= 20 && connect_btn == null){
+                try{
+                    await page.click('button[aria-label="Order Panel"]')
+                }
+                catch(err){
+                    logger.warn("Order panel button is not clicked!: Retrying...")
+                    await sleep(2000)
+                    continue
+                }
+                logger.warn("Clicking on first connect button: Retrying...")
+                connect_btn = await page.$('div[data-name="order-panel"] button')
+                try_count += 1
+                await sleep(4000)
             }
-            catch(err){
-                logger.warn("Order panel button is not clicked!: Retrying...")
-                await sleep(2000)
-                continue
-            }
-            logger.warn("Clicking on first connect button: Retrying...")
-            connect_btn = await page.$('div[data-name="order-panel"] button')
-            try_count += 1
-            await sleep(4000)
+            await connect_btn.click()
         }
-        await connect_btn.click()
+        catch(error){
+            logger.error(`Error in Clicking on first connect button`)
+            logger.warn(`Skipping`)
+        }
+
+        await policy_accepting(page)
 
         logger.info("Clicking on papertrading connect button")
         await page.waitForSelector('div[data-broker="Paper"] button', { timeout:90000 })
         await page.click('div[data-broker="Paper"] button')
 
+        await policy_accepting(page)
         logger.info("Clicking on broker login submit button")
         try_count = 0;
         do{
@@ -124,21 +135,49 @@ module.exports = {
     async create_initial_transaction(page){
         logger = change_logger_label(logger, "CREATE_TRANS")
 
+        logger.info("Clicking on Trade button")
+        await page.waitForSelector('button[title="Place an order via Order Panel or DOM"]')
+        await page.click('button[title="Place an order via Order Panel or DOM"]')
+
+        logger.warn("Waiting for market button instead of clicking on it!")
         logger.info("Clicking on market button")
         var market_brn = await page.$("#Market")
-        try_count = 0;
-        while(try_count <= 20 && market_brn == null){
-            await page.click('button[aria-label="Order Panel"]')
-            await sleep(3000)
-            logger.warn("Clicking on market button: Retrying...")
-            market_brn = await page.$("#Market")
-            try_count += 1
-        }
-        await page.click("#Market")
 
+        logger.error("Skipping Clicking on market button")
+        // try_count = 0;
+        // while(try_count <= 20 && market_brn == null){
+        //     await page.click('button[aria-label="Order Panel"]')
+        //     await sleep(3000)
+        //     logger.warn("Clicking on market button: Retrying...")
+        //     market_brn = await page.$("#Market")
+        //     try_count += 1
+        // }
+        // await page.click("#Market")
+        
+        // ToDo: closing advertisment
+        // 'div[data-role="toast-container"] article button'
         logger.info("Clicking on unit")
-        await page.waitForSelector('div[data-name="order-panel"] input[inputmode="numeric"]')
-        await page.focus('div[data-name="order-panel"] input[inputmode="numeric"]')
+        // await page.waitForTimeout(5000)
+        // await page.waitForSelector('div[data-name="order-panel"] input[value="1"]')
+        // await page.focus('div[data-name="order-panel"] input[value="1"]')
+
+        try_count = 0;
+        do{
+            await page.click('button[title="Place an order via Order Panel or DOM"]')
+
+            if(await close_ad(page)){
+                logger = change_logger_label(logger, "CREATE_TRANS")
+            }
+            trade_is_opened = await page.$('div[data-name="order-panel"] input[value="1"]')
+            await page.waitForTimeout(500)
+            try_count += 1
+            if(try_count > 10)
+                throw new Error("Problem with finding unit after clicking on trade button")
+        }while(!trade_is_opened)
+        // await page.waitForTimeout(5000)
+        await page.focus('div[data-name="order-panel"] input[value="1"]')
+        // await page.waitForTimeout(5000)
+        await page.click('div[data-name="order-panel"] input[value="1"]')
 
         // logger.info("Check on two checkboxes")
         // await page.waitForSelector('input[type="checkbox"]')
@@ -279,5 +318,36 @@ module.exports = {
             var res = await fs.promises.rename(`${downloadPath}/${downloadedFilename}`, `${downloadPath}/${newFilename}.csv`);
         }
         return final_string_paths.slice(0, final_string_paths.length-2).trim()
+    }
+}
+
+async function close_ad(page){
+    close_btn = await page.$('div[data-role="toast-container"] article button')
+    if(close_btn != null){
+        logger = change_logger_label(logger, "CLOSING AD")
+        await close_btn.click()
+        if(!(await page.$('div[data-role="toast-container"] article button'))){
+            logger.info("Ad Closed Successfully!")
+            return true
+        }
+        else{
+            logger.warn("Something wrong with closing the ad!")
+            return false
+        }
+    }
+    return false
+}
+
+async function policy_accepting(page){
+    try{
+        btns = await page.$$("article button")
+        if(btns.length > 1){
+            await btns[1].click()
+            return true
+        }
+        return false
+    }
+    catch{
+        return false
     }
 }
