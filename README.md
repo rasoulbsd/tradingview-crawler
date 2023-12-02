@@ -2,7 +2,7 @@
 
 ## Cloning the repo
 
-if your operating system is Windows and you have encountered an error similar to this "Error: Invalid file path", you should enter the below command to avoid this problem (specially when you want to checkout to another branch)
+if your operating system is Windows and you have encountered an error similar to this "Error: Invalid file path", you should enter the below command to avoid this problem (especially when you want to checkout to another branch)
 ```
 git config core.protectNTFS false
 ```
@@ -10,7 +10,7 @@ git config core.protectNTFS false
 ## Deploying repo to a VPS
 We must add the server's ssh-key to the deploy keys of the server. Consider that you must fork the repo to be able to add the deploy key. 
 When creating the deploy key for the repo, make sure to check the "write access" checkbox.
-After adding the deploy key, you can clone the repo by the ssh method.
+After adding the deploy key, you can clone the repo by the SSH method.
 
 ## Server Setup
 You must have npm and node installed on the machine. It is very much preferred to use nvm and install node version 16.
@@ -109,7 +109,7 @@ Now go to the project directory and run the server:
 ```
 npm run server
 ```
-**Note:** The default port is 80. If want to run on another port, for now, edit the "src/app.js"
+**Note:** The default port is 80. If you want to run on another port, for now, edit the "src/app.js"
 
 ### Screen Commands
 #### list screens in a machine:
@@ -126,20 +126,31 @@ ctrl+a d
 ```
 
 ## APIs
-### Creating Account in Tradingview
+### Creating an Account in Tradingview
 Use the command below to start creating a Tradingview account on your local machine:
 ```
 npm run tv:create_account
 ```
 #### Note:
-1. Be aware that it must be run on a local machine because you may face `reCaptcha` during account creation and you should have a graphic user interface and the code can not be run headless. Also consider that when you see the reCapthca button, you have 60sec to solve that but it is recommended to solve it under 30sec, then you must click on the submit button under that.
+1. Be aware that it must be run on a local machine because you may face `reCaptcha` during account creation and you should have a graphic user interface and the code can not be run headless. Also consider that when you see the reCapthca button, you have 60 seconds to solve that but it is recommended to solve it under 30 seconds, then you must click on the submit button under that.
 
-2. Because it is running locally, you may encounter network errors based on your network status. In that case, the problem should be solved by retrying or changing the network or VPN based on your situation.
+2. Because it runs locally, you may encounter network errors based on your network status. The problem should be solved by retrying or changing the network or VPN based on your situation.
 
 #### Functionalities
 There are several functions you can use with `npm`:
 * Create email in Cpanel
 * exporting account history
-* Create account in Tradingview
+* Create an account in Tradingview
 * log in to a Tradingview account
 * set prop in paper trading in Tradingview for an existing account
+
+#### Demo
+
+
+
+https://github.com/rasoulbsd/tradingview-crawler/assets/35425167/f204468a-1b39-4b5a-a731-710ccb80a864
+
+
+
+
+
