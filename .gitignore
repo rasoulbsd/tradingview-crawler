@@ -5,6 +5,8 @@ package-lock.json
 titles.json
 titles_*.json
 
+.env
+*.env
 staticfiles/
 .idea/*
 *.pyc
@@ -14,8 +16,8 @@ db.sqlite3
 .DS_Store
 */.Ds_Store
 *.vscode
-lib/
-bin/
+# lib/
+# bin/
 include/
 .Python
 pip-selfcheck.json
@@ -36,7 +38,7 @@ log.txt
 log_resend.txt
 */log.txt
 */log_resend.txt
-*.txt
+# *.txt
 
 crawlers/.DS_Store
 credentials.json
@@ -47,3 +49,9 @@ src/.DS_Store
 src/test.js
 package-lock.json
 
+.env
+local_file_db.text
+local_file_db.txt
+
+screenshots
+downloads
