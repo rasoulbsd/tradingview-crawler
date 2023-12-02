@@ -169,7 +169,6 @@ sdf1266@sarmayedigital.com, sdf1266_sarmayedigital, 16f073a4-49123!073a4-, 16f07
 sdf1270@sarmayedigital.com, sdf1270_sarmayedigital, 3acd9581-10123!d9581-, 3acd9581-10123!, Farrah, Salter
 sdf1269@sarmayedigital.com, sdf1269_sarmayedigital, 29f2e748-c0123!2e748-, 29f2e748-c0123!, Pattie, Alfie
 sdf1278@sarmayedigital.com, sdf1278_sarmayedigital, 9765ca37-44123!5ca37-, 9765ca37-44123!, Oralle, Niles
-<<<<<<< HEAD
 sdf1309@sarmayedigital.com, sdf1309_sarmayedigital, ba1e6d02-33123!e6d02-, ba1e6d02-33123!, Dora, Kristianson
 sdf1311@sarmayedigital.com, sdf1311_sarmayedigital, ffdeef2c-b3123!eef2c-, ffdeef2c-b3123!, Sibley, Danyette
 sdf1310@sarmayedigital.com, sdf1310_sarmayedigital, 8f49fd6f-d5123!9fd6f-, 8f49fd6f-d5123!, Melicent, Washburn
@@ -237,3 +236,4 @@ sdf1424@sarmayedigital.com, sdf1424_sarmayedigital, 61edc3b1-76!e2a88-, 31c7db52
 sdf1427@sarmayedigital.com, sdf1427_sarmayedigital, 308f4f3c-8e!1084c-, 9cf57978-d5!, Alexis, Welles
 sdf1428@sarmayedigital.com, sdf1428_sarmayedigital, 594a4ad7-ee!c0d84-, 57611741-7e!, Wilhelmina, Pantin
 sdf1431@sarmayedigital.com, sdf1431_sarmayedigital, e3e3321f-5c!cbec6-, 225a01b7-7a!, Laryssa, Quinton
+sdf1301@sarmayedigital.com, sdf1301_sarmayedigital, d2c6dbab-33!a2510-, 46658838-3b!, Noelle, Mandych
