@@ -48,6 +48,7 @@ const test = false;
     }
     // const verification_url = await cpanel_verfiy_email(email)
     logger.info(`End of email verification`)
+    console.log(verification_url)
 
     // res = await tv_create_account(page, email, username, acc_pass, firstname, lastname, state=2, temp_mail=false);
     res = await verify_email(verification_url);

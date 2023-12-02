@@ -1,4 +1,4 @@
-const { initial_logger, change_logger_label } = require("../helpers/initial.js")
+const { initial_crawler_config, initial_logger, change_logger_label } = require("../helpers/initial.js")
 var logger = initial_logger()
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -37,8 +37,10 @@ module.exports = {
         // await page.keyboard.type(username)
         await page.focus('input[name=id_email]')
         await page.keyboard.type(email)
+        await sleep(800)
         await page.focus('input[name=id_password]')
         await page.keyboard.type(password)
+        await sleep(800)
         // await page.waitForSelector('input[type=checkbox]')
         // await (await page.$("input[type=checkbox]")).click()
 
@@ -88,16 +90,20 @@ module.exports = {
         await page.click('button[aria-label="Open user menu"]')
     
         logger.info("Click on sign in button")
+        // screenshot
+        //await page.screenshot({path: './screenshots/1-Click_on_sign_in_button.png'});
         await page.waitForSelector("button[data-name=header-user-menu-sign-in]")
         sign_in_btn = await page.$("button[data-name=header-user-menu-sign-in]")
         await sign_in_btn.evaluate((el) => el.click());
     
         logger.info("Click on email button")
+        //await page.screenshot({path: './screenshots/2-Click_on_email_button.png'});
         await page.waitForSelector('button[name="Email"]', {timeout: 60000*2})
         email_btn = await page.$('button[name="Email"]');
         await email_btn.click()
     
         logger.info("Typing email and password")
+        //await page.screenshot({path: './screenshots/3-Typing_email_and_password.png'});
         await page.waitForSelector('input[name=id_username]')
         await page.focus('input[name=id_username]')
         await page.keyboard.type(email)
@@ -107,11 +113,31 @@ module.exports = {
         await sleep(1000)
     
         logger.info("Click on remember me checkbox: disable it")
+        //await page.screenshot({path: './screenshots/4-Click_on_remember_me_checkbox:_disable_it.png'});
         await page.click("input[type=checkbox]")
     
         logger.info("Submiting login form")
+        //await page.screenshot({path: './screenshots/5-Submiting_login_for.png'});
         await page.click("form button")
-    
+
+        // try_count = 0;
+        // do{
+        //     reCaptcha_num = await page.$$('iframe[title="reCAPTCHA"]')
+        //     if (reCaptcha_num.length == 2){
+        //         logger.error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+                // await sleep(10000)
+        //         throw new Error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+        //     }
+        //     try_count += 1;
+        //     await sleep(1000)
+        // }while(reCaptcha_num.length != 2 && try_count <= 10)
+        // if(try_count >= 10){
+        //     logger.error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+        //     throw new Error(`reCaptcha found!: reCaptcha_num_len=${reCaptcha_num.length}`)
+        // }
+
+        // await page.
+
         return page
     },
 
@@ -122,6 +148,7 @@ module.exports = {
         }
         catch(err){
             logger.error(err.message)
+            throw new Error(`error in verfing email: openning browser: \n${err.message}`)
             process.exit(3)
         }
 
@@ -140,7 +167,9 @@ module.exports = {
         // await page.keyboard.type(lastName)
 
         logger.info("Click on policy button")
-        await page.click("input[checkbox]")
+        await page.waitForSelector('input[type=checkbox]')
+        checkboxes = await page.$$("input[type=checkbox]")
+        await checkboxes[1].click()
 
         logger.info("Click on submit button")
         await page.click('form button')
