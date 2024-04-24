@@ -1,5 +1,3 @@
-# This Repository is for educational purposes only!
-
 # Tradingview Crawler
 
 ## Cloning the repo
